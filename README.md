@@ -91,7 +91,7 @@ $\dot{x}=e^{-\omega_{0}t}.C, \dot{x}(0)=v_{0}\cos \theta \Rightarrow \dot{x}=v_{
 
 </div>
 
-Com isso, conseguimos obter $\dot{x}$. Agora, para obtermos $x$, $y$, faremos o mesmo procedimento, obtendo os seguintes resultados:
+Com isso, conseguimos obter $\dot{x}$. Agora, para obtermos $x$ e $y$, faremos o mesmo procedimento, obtendo os seguintes resultados:
 
 <div align="center">
   
@@ -100,6 +100,8 @@ $x=-\frac{v_{0}\cos \theta}{\omega_{0}}(1-e^{-\omega_{0} t}),$
 $y=\frac{1}{\omega_{0}}(v_{0}\sin \theta+\frac{g}{\omega_{0}})(1-e^{-\omega_{0}t})-\frac{gt}{\omega_{0}}.$
 
 </div>
+
+
 
 
 
