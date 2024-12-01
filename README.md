@@ -91,7 +91,7 @@ $\dot{x}=e^{-\omega_{0}t}.C, \dot{x}(0)=v_{0}\cos \theta \Rightarrow \dot{x}=v_{
 
 </div>
 
-Com isso, conseguimos obter $\dot{x}$. Agora, para obtermos $x$, faremos o mesmo procedimento, obtendo o esguinte resultado:
+Com isso, conseguimos obter $\dot{x}$. Agora, para obtermos $x$, faremos o mesmo procedimento, obtendo o seguinte resultado:
 
 <div align="center">
   
