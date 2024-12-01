@@ -14,6 +14,8 @@ Vamos começar com uma contextualização: um pirata percebe que tem um inimigo 
 
 ## Física
 
+### Trajetória
+
 O movimento oblíquo, diferente da queda livre, possui duas direções de movimento, sendo, nesse caso, o eixo x referente ao eixo horizontal e o eixo y ao eixo vertical.
 
 A trajetória é descrita por uma parábola, mas por que? Isso ocorre devido as forças atuantes durante o movimento. Durante o lançamento, apenas a força gravitacional($`\vec{F_{g}}`$) atua no objeto, por isso, como a gravidade atua apontando para o solo, a velocidade no eixo y reduz a ponto de inverter o sentido, enquanto que no eixo x não há variação de velocidade, ou seja, sendo constante durante todo o movimento.
@@ -100,6 +102,12 @@ $x=-\frac{v_{0}\cos \theta}{\omega_{0}}(1-e^{-\omega_{0} t}),$
 $y=\frac{1}{\omega_{0}}(v_{0}\sin \theta+\frac{g}{\omega_{0}})(1-e^{-\omega_{0}t})-\frac{gt}{\omega_{0}}.$
 
 </div>
+
+### O Problema do Pirata
+
+Mas afinal, quais são as respostas para as dúvidas do pirata? Para entendermos melhor a situação, usaremos uma simulação/jogo.
+
+
 
 
 
