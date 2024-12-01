@@ -65,6 +65,8 @@ $\ddot{y}=-\frac{b}{m}\dot{y}-g=-\omega_{0}\dot{y}-g$.
 
 </div>
 
+Nosso objetivo é, a partir das EDOS encontradas, obtermos as funções horárias no eixo x e y. Por enquanto, trabalharemos apenas com a EDO relativa ao eixo x.
+
 
 
 
