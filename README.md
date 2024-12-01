@@ -48,9 +48,9 @@ Então, ao separarmos a força resultante, ficamos com:
 
 <div align="center">
   
-$m\ddot{x}=-b\dot{x}\Rightarrow\ddot{x}=-\frac{b}{m}\dot{x}$,
+$m\ddot{x}=-b\dot{x}\Rightarrow\ddot{x}=-\frac{b}{m}\dot{x},$
 
-$m\ddot{y}=-b\dot{y}-mg\Rightarrow\ddot{y}=-\frac{b}{m}\dot{y}-g$.
+$m\ddot{y}=-b\dot{y}-mg\Rightarrow\ddot{y}=-\frac{b}{m}\dot{y}-g.$
 
 
 </div>
@@ -59,9 +59,9 @@ Por mera conveniência, substituiremos $b/m$ por $\omega_{0}$, obtendo as seguin
 
 <div align="center">
   
-$\ddot{x}=-\frac{b}{m}\dot{x}=-\omega_{0}\dot{x}$,
+$\ddot{x}=-\frac{b}{m}\dot{x}=-\omega_{0}\dot{x},$
 
-$\ddot{y}=-\frac{b}{m}\dot{y}-g=-\omega_{0}\dot{y}-g$.
+$\ddot{y}=-\frac{b}{m}\dot{y}-g=-\omega_{0}\dot{y}-g.$
 
 </div>
 
@@ -71,7 +71,7 @@ Em relação ao eixo x, temos:
 
 <div align="center">
   
-$\ddot{x}=-\omega_{0}\dot{x}$.
+$\ddot{x}=-\omega_{0}\dot{x}.$
 
 </div>
 
@@ -91,11 +91,13 @@ $\dot{x}=e^{-\omega_{0}t}.C, \dot{x}(0)=v_{0}\cos \theta \Rightarrow \dot{x}=v_{
 
 </div>
 
-Com isso, conseguimos obter $\dot{x}$. Agora, para obtermos $x$, faremos o mesmo procedimento, obtendo o seguinte resultado:
+Com isso, conseguimos obter $\dot{x}$. Agora, para obtermos $x$, $y$, faremos o mesmo procedimento, obtendo os seguintes resultados:
 
 <div align="center">
   
-$x=-\frac{v_{0}\cos \theta}{\omega_{0}}(1-e^{-\omega_{0} t}).$
+$x=-\frac{v_{0}\cos \theta}{\omega_{0}}(1-e^{-\omega_{0} t}),$
+
+$y=\frac{1}{\omega_{0}}(v_{0}\sin \theta+\frac{g}{\omega_{0}})(1-e^{-\omega_{0}t})-\frac{gt}{\omega_{0}}.$
 
 </div>
 
