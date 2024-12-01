@@ -32,12 +32,38 @@ No sistema acima, atuam as seguintes forças:
 
 <div align="center">
 
-$\vec{F_{g}}=-mg\hat{j}, \ \vec{F_{v}}=-b\vec{v}$
+$\vec{F_{g}}=-mg\hat{j}, \ \vec{F_{v}}=-b\vec{v}.$
 
 </div>
 
 Sabendo disso, usaremos a segunda lei de Newton para conseguirmos montar uma EDO do movimento:
 
+<div align="center">
+
+$\vec{F_{R}}=\dot{\vec{p}}=m\ddot{x}\hat{i}+m\ddot{y}\hat{j}=-b\dot{x}\hat{i}-b\dot{y}\hat{j}-mg\hat{j}.$
+
+</div>
+
+Então, ao separarmos a força resultante, ficamos com:
+
+<div align="center">
+  
+$m\ddot{x}=-b\dot{x}\Rightarrow\ddot{x}=-\frac{b}{m}\dot{x}$,
+
+$m\ddot{y}=-b\dot{y}-mg\Rightarrow\ddot{y}=-\frac{b}{m}\dot{y}-g$.
+
+
+</div>
+
+Por mera conveniência, substituiremos $b/m$ por $\omega_{0}$, obtendo as seguintes EDOS:
+
+<div align="center">
+  
+$\ddot{x}=-\frac{b}{m}\dot{x}=-\omega_{0}\dot{x}$,
+
+$\ddot{y}=-\frac{b}{m}\dot{y}-g=-\omega_{0}\dot{y}-g$.
+
+</div>
 
 
 
