@@ -83,7 +83,7 @@ $\dfrac{d\dot{x}}{dt}=-\omega_{0}\dot{x}\Rightarrow \int\dfrac{d\dot{x}}{\dot{x}
 
 </div>
 
-Porém, precisamos descobrir o valor de C, para que a função de $\dot{x}$ esteja completa. Para isso, já que sabemos que $\dot{x}(0)=0$, igualaremos $\dot{x}(t)=0$, em $t=0$:
+Porém, precisamos descobrir o valor de $C$, para que a função de $\dot{x}$ esteja completa. Para isso, já que sabemos que $\dot{x}(0)=0$, igualaremos $\dot{x}(t)=0$, em $t=0$:
 
 <div align="center">
   
