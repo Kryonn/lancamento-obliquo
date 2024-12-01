@@ -2,7 +2,7 @@
 
 A ideia geral do projeto é fazer uso de simulações em python, a fim de obter uma melhor compreensão a cerca da física do nosso cotidiano. O foco principal do projeto é mostrar um pouco mais sobre o lançamento oblíquo e suas principais características, como a variação de energia, altura e alcance máximo. 
 
-## Pirata
+## Contextualização
 Vamos começar com uma contextualização: um pirata percebe que tem um inimigo distante a 100 metros de seu navio e, sem pensar duas vezes, o atinge com o canhão. No dia seguinte, se encontra na mesma situação, ele percebe, através do som, que há um inimigo distante a 100 metros de seu navio, porém dessa vez o inimigo está do outro lado de uma pequena ilha. Sabendo disso, ele lembrou do dia anterior e então fez os seguintes questionamentos: se eu apenas aumentar o ângulo de inclinação do canhão será o suficiente para atingir os inimigos sem atingir parte da ilha? Se não, quanto eu preciso aumentar de pólvora(velocidade de lançamento) para que seja suficiente?
 
 
@@ -66,6 +66,43 @@ $\ddot{y}=-\frac{b}{m}\dot{y}-g=-\omega_{0}\dot{y}-g$.
 </div>
 
 Nosso objetivo é, a partir das EDOS encontradas, obtermos as funções horárias no eixo x e y. Por enquanto, trabalharemos apenas com a EDO relativa ao eixo x.
+
+Em relação ao eixo x, temos:
+
+<div align="center">
+  
+$\ddot{x}=-\omega_{0}\dot{x}$.
+
+</div>
+
+Isso significa que precisamos de uma função da qual a segunda derivada é proporcional à primeira derivada dela. Para começarmos os cálculos, reescreveremos a EDO e integraremos os dois lados da igualdade:
+
+<div align="center">
+  
+$\dfrac{d\dot{x}}{dt}=-\omega_{0}\dot{x}\Rightarrow \int\dfrac{d\dot{x}}{\dot{x}}=-\omega_{0}\int dt\Rightarrow ln\dot{x}=-\omega_{0}t + C^{'}\Rightarrow \dot{x}=e^{-\omega_{0}t}.e^{C^{'}}\Rightarrow \dot{x}=e^{-\omega_{0}t}.C.$
+
+</div>
+
+Porém, precisamos descobrir o valor de C, para que a função de $\dot{x}$ esteja completa. Para isso, já que sabemos que $\dot{x}(0)=0$, igualaremos $\dot{x}(t)=0$, em $t=0$:
+
+<div align="center">
+  
+$\dot{x}=e^{-\omega_{0}t}.C, \dot{x}(0)=v_{0}\cos \theta \Rightarrow \dot{x}=v_{0}\cos \theta.e^{-\omega_{0}t}.$
+
+</div>
+
+Com isso, conseguimos obter $\dot{x}$. Agora, para obtermos $x$, faremos o mesmo procedimento, obtendo o esguinte resultado:
+
+<div align="center">
+  
+$x=-\frac{v_{0}\cos \theta}{\omega_{0}}(1-e^{-\omega_{0} t}).$
+
+</div>
+
+
+
+
+
 
 
 
