@@ -18,7 +18,7 @@ Vamos começar com uma contextualização: um pirata percebe que tem um inimigo 
 
 O movimento oblíquo, diferente da queda livre, possui duas direções de movimento, sendo, nesse caso, o eixo x referente ao eixo horizontal e o eixo y ao eixo vertical.
 
-A trajetória é descrita por uma parábola, mas por que? Isso ocorre devido as forças atuantes durante o movimento. Durante o lançamento, apenas as forças gravitacional($`\vec{F_{g}}`$) e viscosa($`\vec{F_{q}}`$) atuam no objeto, por isso, como a gravidade atua apontando para o solo, a velocidade no eixo y reduz a ponto de inverter o sentido, enquanto que no eixo x não há variação de velocidade.
+A trajetória é descrita por uma "parábola", mas por que? Isso ocorre devido as forças atuantes durante o movimento. Durante o lançamento, apenas as forças gravitacional($`\vec{F_{g}}`$) e viscosa($`\vec{F_{q}}`$) atuam no objeto, por isso, como a gravidade atua apontando para o solo, a velocidade no eixo y reduz a ponto de inverter o sentido, enquanto que no eixo x não há variação de velocidade.
 
 A figura a seguir nos mostra o modelo geral de um lançamento oblíquo, sendo $\vec{v_{0}}$ a velocidade inicial do objeto, $\vec{F_{g}}$ a força gravitacional e $\vec{r}$ o vetor posição.
 
@@ -115,7 +115,7 @@ $x_{0}=x_{1} \Rightarrow \frac{v_{0}\cos\theta}{\omega_{0}}\cdot(1-e^{-\omega_{0
 
 </div>
 
-Com isso, concluímos que é necessário multiplicar o valor da velocidade por $\cos\theta$ \ $\cos(\theta+\alpha).$
+Com isso, concluímos que é necessário multiplicar o valor da velocidade por $\cos\theta / \cos(\theta+\alpha).$
 
 ## Implementação
 
