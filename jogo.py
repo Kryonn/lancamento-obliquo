@@ -45,11 +45,11 @@ g = 9.8
 flag = 0   # Flag para verificação da primeira colisão
 
 obstaculo_x = 450
-obstaculo_y = 400
-obstaculo_larg = 100
+obstaculo_y = 350
+obstaculo_larg = 120
 obstaculo_alt = altura_display - obstaculo_y
 
-quad = pygame.Rect(800, 500, 50, 50)
+quad = pygame.Rect(850, 500, 100, 100)
 
 # Configuração do pygame
 pygame.init()
@@ -130,14 +130,14 @@ def desenha_tela():
 
     desenha_slider_atr()
     texto_Atr(omega)
-    desenha_quadrado()
     texto_Info()
+    desenha_quadrado()
     desenha_barco()
 
     if flag == 1:
           obstaculo = pygame.Rect(obstaculo_x, obstaculo_y, obstaculo_larg, obstaculo_alt) 
           desenha_obstaculo(obstaculo)
-          # Cria o retângulo da bola com base na posição e raio da bola
+
           bola_rect = pygame.Rect(
                pos_bola_conv[0] - raio_bola,  
                pos_bola_conv[1] - raio_bola,  
@@ -157,8 +157,8 @@ def desenha_barco():
     Não possui parâmetros ou retorno.
     """
     barco_img = pygame.image.load('barco.png')  
-    barco_img = pygame.transform.scale(barco_img, (180, 180))
-    tela.blit(barco_img, (quad.x, quad.y-40))  
+    barco_img = pygame.transform.scale(barco_img, (210, 210))
+    tela.blit(barco_img, (quad.x-40, quad.y-70))  
 
 def desenhar_seta(origem, comp):
      """
@@ -207,14 +207,14 @@ def desenha_quadrado():
 
 def desenha_obstaculo(obstaculo):
      """
-     Desenha um retângulo para referência da posição do obstáculo.
+     Desenha um retângulo para referência da posição do obstáculo e adiciona a imagem da palmeira.
 
      Não possui parâmetros ou retorno.
      """
      pygame.draw.rect(tela, "black", obstaculo)
      palmeira_img = pygame.image.load('palmeira.png')  
-     palmeira_img = pygame.transform.scale(palmeira_img, (250, 300))  # Ajusta o tamanho
-     tela.blit(palmeira_img, (obstaculo.x-80, obstaculo.y-20))  
+     palmeira_img = pygame.transform.scale(palmeira_img, (300, 350))  # Ajusta o tamanho
+     tela.blit(palmeira_img, (obstaculo.x-80, obstaculo.y-50))  
 
 def desenha_slider_vel():
     """
@@ -342,7 +342,7 @@ def main():
                     dragging_vel = False
                     dragging_atr = False
 
-               if evento.type == pygame.MOUSEMOTION:
+               if evento.type == pygame.MOUSEMOTION:   # Verifica se está arrastando o mouse
                     if dragging_vel:
                          new_x_vel = max(sliderVel_min, min(evento.pos[0], sliderVel_max - sliderVel_handle.width))
                          sliderVel_handle.x = new_x_vel
