@@ -105,7 +105,15 @@ $y=\frac{1}{\omega_{0}}(v_{0}\sin \theta+\frac{g}{\omega_{0}})(1-e^{-\omega_{0}t
 
 ### O Problema do Pirata
 
-Mas afinal, quais são as respostas para as dúvidas do pirata? Para entendermos melhor a situação, usaremos uma simulação/jogo. Com ela, é possível, a partir da mudança na angulação do canhão, notar que 
+Mas afinal, quais são as respostas para as dúvidas do pirata? Para entendermos melhor a situação, usaremos uma simulação/jogo. Com ela, é possível, a partir da mudança na angulação do canhão, notar que, se houver a manutenção da velocidade inicial, não será possível atingir o inimigo.
+
+Sabendo disso, vem a seguinte pergunta: o quanto ele precisa aumentar de pólvora no canhão, para que consiga atingir o inimigo? Para responder essa pergunta, vamos começar considerando $x_{0}$ como a distância do inimigo no dia anterior e $x_{1}$ a distância do inimigo no dia seguinte. Sabemos que a distância permanece a mesma em ambos os dias, por isso igualaremos:
+
+<div align="center">
+  
+$x_{0}=x_{1} \Rightarrow \frac{v_{0}\cos\theta}{\omega_{0}}\cdot(1-e^{-\omega_{0}t})=\frac{v_{1}\cos\theta}{\omega_{0}}\cdot(1-e^{-\omega_{0}t})$
+
+</div>
 
 ## Implementação
 
