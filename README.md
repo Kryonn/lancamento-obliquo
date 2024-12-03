@@ -107,15 +107,39 @@ $y=\frac{1}{\omega_{0}}(v_{0}\sin \theta+\frac{g}{\omega_{0}})(1-e^{-\omega_{0}t
 
 Mas afinal, quais são as respostas para as dúvidas do pirata? Para entendermos melhor a situação, usaremos uma simulação/jogo.
 
+## Implementação
 
+- **Linguagens e Pacotes:**  
+  O projeto foi implementado em Python, utilizando os pacotes NumPy, Pygame e Math. Com NumPy servindo para a manipulação e cálculo eficiente com arrays e álgebra linear, Pygame criando o jogo 2d em si com multimídia interativa e Math oferecendo operações matemáticas básicas e funções trigonométricas.
 
+## Como Usar
 
+- **Instalação e Dependências:**  
+  - Certifique-se de que o Python 3.12.7 (ou outra versão de linguagem) está instalado. Assim como os pacotes do Pygame e do NumPy. Essas verificações podem ser feitas pelo prompt de comando digitando:
+    ```bash
+    python --version
+    python -m pygame --version
+    pip show numpy
+    
+  - Caso não estejam sigam os passos de instalação sugeridos pelos sites dos desenvolvedores das ferramentas.
 
+  - **Exemplos de Uso:**  
+  - Para rodar a simulação utilize o código:
+    ```python
+      python jogo.py
+    ```
+ - Certifique-se de baixar o repositório do github para correta execução.
 
+   **Configuração e Uso:** Parâmetros iniciais podem ser ajustados:
+    - Velocidade inicial - basta mexer na barra que aparce com o mouse.
+    - Resistência do ar - basta mexer na barra que aparce com o mouse.
+    - Ângulo do lançamento - com as seta para cima ou para baixo ajuste o ângulo.
+    - A cada lançamento ou ajuste apertar o R pra resetar e poder lançar novamente.
 
-
-
-
-
-
-
+  - **Informações sobre o projeto:**
+ 
+  Esste projeto foi desenvolvido por:
+  
+      Beatriz Alves dos Santos
+      Kevin Ryoji Nakashima
+      Eduardo Neves Gomes da Silva
