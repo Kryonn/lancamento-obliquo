@@ -105,7 +105,7 @@ $y=\frac{1}{\omega_{0}}(v_{0}\sin \theta+\frac{g}{\omega_{0}})(1-e^{-\omega_{0}t
 
 ### O Problema do Pirata
 
-Mas afinal, quais são as respostas para as dúvidas do pirata? Para entendermos melhor a situação, usaremos uma simulação/jogo.
+Mas afinal, quais são as respostas para as dúvidas do pirata? Para entendermos melhor a situação, usaremos uma simulação/jogo. Com ela, é possível, a partir da mudança na angulação do canhão, notar que 
 
 ## Implementação
 
