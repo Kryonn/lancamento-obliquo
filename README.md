@@ -141,10 +141,9 @@ Com isso, concluímos que é necessário multiplicar o valor da velocidade por $
  - Certifique-se de baixar o repositório do github para correta execução.
 
    **Configuração e Uso:** Parâmetros iniciais podem ser ajustados:
-    - Velocidade inicial - basta mexer na barra que aparce com o mouse.
-    - Resistência do ar - basta mexer na barra que aparce com o mouse.
+    - Velocidade inicial - basta mexer na barra que aparece com o mouse.
+    - Resistência do ar - basta mexer na barra que aparece com o mouse.
     - Ângulo do lançamento - com as seta para cima ou para baixo ajuste o ângulo.
-    - A cada lançamento ou ajuste apertar o R pra resetar e poder lançar novamente.
 
   - **Informações sobre o projeto:**
  
