@@ -111,7 +111,7 @@ Sabendo disso, vem a seguinte pergunta: o quanto ele precisa aumentar de pólvor
 
 <div align="center">
   
-$x_{0}=x_{1} \Rightarrow \frac{v_{0}\cos\theta}{\omega_{0}}\cdot(1-e^{-\omega_{0}t})=\frac{v_{1}\cos(\theta+\alpha)}{\omega_{0}}\cdot(1-e^{-\omega_{0}t})\Rightarrow v_{0}\cos\theta=v_{1}\cos(\theta+\alpha)\Rightarrow v_{1}=v{0}\frac{\cos\theta}{\cos(\theta+\alpha)}$
+$x_{0}=x_{1} \Rightarrow \frac{v_{0}\cos\theta}{\omega_{0}}\cdot(1-e^{-\omega_{0}t})=\frac{v_{1}\cos(\theta+\alpha)}{\omega_{0}}\cdot(1-e^{-\omega_{0}t})\Rightarrow v_{0}\cos\theta=v_{1}\cos(\theta+\alpha)\Rightarrow v_{1}=v_{0}\frac{\cos\theta}{\cos(\theta+\alpha)}$
 
 </div>
 
