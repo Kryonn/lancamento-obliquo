@@ -35,6 +35,7 @@ origem_canhao = (37, altura_display - 27)
 pos_bola_conv = (origem_canhao[0], origem_canhao[1])
 contar_tempo = False
 colisao = False
+acerto = False
 cor = "red"
 
 tempo = 0
@@ -106,35 +107,27 @@ def calcula_trajetoria(tempo):
      return pos_x, pos_y
 
 def desenha_tela():
-    """
-    Desenha todos os elementos da tela, incluindo o canhão, a bola, sliders,
-    informações textuais, obstáculos e alvos. Também verifica colisão entre
-    a bola e o obstáculo.
+     """
+     Desenha todos os elementos da tela, incluindo o canhão, a bola, sliders,
+     informações textuais, obstáculos e alvos. Também verifica colisão entre
+     a bola e o obstáculo.
 
-    Não possui parâmetros ou retorno.
-    """
-    global colisao
-    cor_tela = (153, 201, 239)
-    tela.fill(cor_tela)
-    desenhar_seta(origem_canhao, comp_seta)
+     Não possui parâmetros ou retorno.
+     """
+     global colisao
+     cor_tela = (153, 201, 239)
+     tela.fill(cor_tela)
+     desenhar_seta(origem_canhao, comp_seta)
+     desenha_slider_vel()
+     texto_Vel(vel_inicial)
 
-    pygame.draw.circle(tela, cor, pos_bola_conv, raio_bola)
+     desenha_slider_atr()
+     texto_Atr(omega)
+     texto_Info()
+     desenha_quadrado()
+     desenha_barco()
 
-    # Rotaciona a imagem, centraliza com o canhão e publica
-    imagem_rotacionada = pygame.transform.rotate(img_canhao, angulo_-45)
-    rect = imagem_rotacionada.get_rect(center=origem_canhao)
-    tela.blit(imagem_rotacionada, rect.topleft)
-
-    desenha_slider_vel()
-    texto_Vel(vel_inicial)
-
-    desenha_slider_atr()
-    texto_Atr(omega)
-    texto_Info()
-    desenha_quadrado()
-    desenha_barco()
-
-    if flag == 1:
+     if flag == 1:
           obstaculo = pygame.Rect(obstaculo_x, obstaculo_y, obstaculo_larg, obstaculo_alt) 
           desenha_obstaculo(obstaculo)
 
@@ -148,28 +141,37 @@ def desenha_tela():
           # Verifica colisão
           if bola_rect.colliderect(obstaculo) == True:
                colisao = True
+               
+     if acerto == 1:
+          texto_acerto()
 
+     pygame.draw.circle(tela, cor, pos_bola_conv, raio_bola)
+
+     # Rotaciona a imagem, centraliza com o canhão e publica
+     imagem_rotacionada = pygame.transform.rotate(img_canhao, angulo_-45)
+     rect = imagem_rotacionada.get_rect(center=origem_canhao)
+     tela.blit(imagem_rotacionada, rect.topleft)
 
 def desenha_barco():
-    """
-    Desenha a imagem do alvo (barco) em sua posição predefinida.
+     """
+     Desenha a imagem do alvo (barco) em sua posição predefinida.
 
-    Não possui parâmetros ou retorno.
-    """
-    barco_img = pygame.image.load('barco.png')  
-    barco_img = pygame.transform.scale(barco_img, (210, 210))
-    tela.blit(barco_img, (quad.x-40, quad.y-70))  
+     Não possui parâmetros ou retorno.
+     """
+     barco_img = pygame.image.load('barco.png')  
+     barco_img = pygame.transform.scale(barco_img, (210, 210))
+     tela.blit(barco_img, (quad.x-40, quad.y-70))  
 
 def desenhar_seta(origem, comp):
      """
-    Desenha uma seta rotacionada que representa a direção do disparo.
+     Desenha uma seta rotacionada que representa a direção do disparo.
 
-    Parâmetros:
-    - origem (tuple[int, int]): Coordenadas da base do canhão (ponto inicial da seta).
-    - comp (float): Comprimento da seta em pixels.
+     Parâmetros:
+     - origem (tuple[int, int]): Coordenadas da base do canhão (ponto inicial da seta).
+     - comp (float): Comprimento da seta em pixels.
 
-    Não possui retorno.
-    """
+     Não possui retorno.
+     """
      angulo_rad = numpy.radians(angulo_)
      # Desenha a reta
      dest = (
@@ -273,6 +275,16 @@ def texto_Info():
     tela.blit(text, (350, 30)) # Posição do texto
     tela.blit(text2, (420, 60)) # Posição do texto
 
+def texto_acerto():
+    """
+    Exibe um texto indicando que acertou o alvo no canto superior da tela.
+
+    Não possui parâmetros ou retorno.
+    """
+    font = pygame.font.SysFont("Arial", 20)
+    text = font.render(f'Você acertou o alvo!', True, "red")
+    tela.blit(text, (500, 120)) # Posição do texto
+
 # Funções para verificar as colisões
 def colisao_alvo():
     """
@@ -300,7 +312,7 @@ def main():
 
      Não possui parâmetros ou retorno.
      """
-     global angulo, angulo_, tempo, vel_inicial, vel_inicial_, omega, cor, pos_bola_conv, contar_tempo, pontuacao, flag, colisao
+     global acerto, angulo, angulo_, tempo, vel_inicial, vel_inicial_, omega, cor, pos_bola_conv, contar_tempo, pontuacao, flag, colisao
      sair = False
      dragging_vel = False
      dragging_atr = False
@@ -320,6 +332,7 @@ def main():
                contar_tempo = False  # Para a simulação
                tempo = 0  # Reseta o tempo
                flag = 1
+               acerto = 1
 
           elif colisao == 1 or pos_bola_conv[1] > altura_display or pos_bola_conv[0] > largura_display:
                contar_tempo = False  
@@ -364,6 +377,7 @@ def main():
           
           if teclas[pygame.K_SPACE]:
                contar_tempo = True
+               acerto = 0
 
           pygame.display.flip()
           clock.tick(60)
