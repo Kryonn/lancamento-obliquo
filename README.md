@@ -131,7 +131,7 @@ Com isso, concluímos que é necessário multiplicar o valor da velocidade por $
     python -m pygame --version
     pip show numpy
     
-  - Caso não estejam sigam os passos de instalação sugeridos pelos sites dos desenvolvedores das ferramentas.
+  - Caso não estejam sigam os passos de instalação sugeridos pelos sites dos desenvolvedores das ferramentas ([NumPy](https://numpy.org/pt/install/),  [Pygame](https://www.pygame.org/wiki/GettingStarted)).
 
   - **Exemplos de Uso:**  
   - Para rodar a simulação utilize o código:
