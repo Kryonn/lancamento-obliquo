@@ -40,6 +40,7 @@ cor = "red"
 
 tempo = 0
 omega = 0.4    # Atrito do ar
+omega_ = 0.4    
 vel_inicial = 20   
 vel_inicial_ = 20 
 g = 9.8
@@ -77,7 +78,7 @@ sliderAtr_x = 50
 sliderAtr_y = 120
 
 sliderAtr_rect = pygame.Rect(sliderAtr_x, sliderAtr_y, slider_tam, slider_h)  
-sliderAtr_handle = pygame.Rect(sliderAtr_x+(omega*20), sliderAtr_y-5, 20, 20)  
+sliderAtr_handle = pygame.Rect(sliderAtr_x+(omega_*20), sliderAtr_y-5, 20, 20)  
 sliderAtr_min = sliderAtr_x
 sliderAtr_max = sliderAtr_x + slider_tam  
 
@@ -122,7 +123,7 @@ def desenha_tela():
      texto_Vel(vel_inicial)
 
      desenha_slider_atr()
-     texto_Atr(omega)
+     texto_Atr(omega_)
      texto_Info()
      desenha_quadrado()
      desenha_barco()
@@ -141,7 +142,7 @@ def desenha_tela():
           # Verifica colisão
           if bola_rect.colliderect(obstaculo) == True:
                colisao = True
-               
+
      if acerto == 1:
           texto_acerto()
 
@@ -312,7 +313,7 @@ def main():
 
      Não possui parâmetros ou retorno.
      """
-     global acerto, angulo, angulo_, tempo, vel_inicial, vel_inicial_, omega, cor, pos_bola_conv, contar_tempo, pontuacao, flag, colisao
+     global acerto, angulo, angulo_, tempo, vel_inicial, vel_inicial_, omega, omega_, cor, pos_bola_conv, contar_tempo, pontuacao, flag, colisao
      sair = False
      dragging_vel = False
      dragging_atr = False
@@ -326,6 +327,7 @@ def main():
           if contar_tempo == 0:
                vel_inicial = vel_inicial_
                angulo = angulo_
+               omega = omega_
                colisao = 0
 
           if colisao_alvo():
@@ -364,7 +366,7 @@ def main():
                     if dragging_atr:
                          new_x_atr = max(sliderAtr_min, min(evento.pos[0], sliderAtr_max - sliderAtr_handle.width))
                          sliderAtr_handle.x = new_x_atr
-                         omega = max(0.001, (new_x_atr - sliderAtr_min)*0.05)   # Ajusta o atrito do ar
+                         omega_ = max(0.001, (new_x_atr - sliderAtr_min)*0.05)   # Ajusta o atrito do ar
 
           teclas = pygame.key.get_pressed()
 
