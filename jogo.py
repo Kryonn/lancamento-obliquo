@@ -1,10 +1,25 @@
-# Adicionar documentação!!!
+"""
+Simulação de Lançamento Oblíquo
+
+Descrição:
+     Esse programa é uma simulação interativa de lançamento oblíquo, onde o usuário pode ajustar os parâmetros
+     de velocidade inicial e resistência do ar. O objetivo principal é permitir a observação do comportamento
+     do sistema em diferentes condições. Obstáculos e alvos também são adicionados para tornar a experiência 
+     mais divertida e desafiadora!
+
+Autores: 
+     Beatriz Alves dos Santos (15588630)
+     Kevin Ryoji Nakashima (15675936)
+     Eduardo Neves Gomes da Silva (13822710)
+
+Este projeto faz parte do processo avaliativo da disciplina 7600105 - Física Básica I (2024) da USP-São Carlos ministrada pela(o) [Prof. Krissia de Zawadzki/Esmerindo de Sousa Bernardes]
+"""
 
 import pygame # type: ignore
 import numpy
 import math
 
-# Variáveis
+# Variáveis gerais
 pontuacao = 0
 altura_display = 600
 largura_display = 1000
@@ -13,26 +28,28 @@ altura_seta = 10
 largura_seta = 10
 comp_seta = 60
 
-angulo_ = 45 # Angulo em tempo real
+angulo_ = 45
 angulo = 45
 raio_bola = (0.5*20)
 origem_canhao = (37, altura_display - 27)
 pos_bola_conv = (origem_canhao[0], origem_canhao[1])
 contar_tempo = False
+colisao = False
 cor = "red"
 
 tempo = 0
-omega = 0.4 # atrito do ar
+omega = 0.4    # Atrito do ar
 vel_inicial = 20   
-vel_inicial_ = 20   # velocidade em tempo real
+vel_inicial_ = 20 
 g = 9.8
-flag = 0
+flag = 0   # Flag para verificação da primeira colisão
 
-colisao = False
 obstaculo_x = 450
 obstaculo_y = 400
 obstaculo_larg = 100
 obstaculo_alt = altura_display - obstaculo_y
+
+quad = pygame.Rect(800, 500, 50, 50)
 
 # Configuração do pygame
 pygame.init()
@@ -40,13 +57,42 @@ tela = pygame.display.set_mode((largura_display, altura_display))
 pygame.display.set_caption("Lançamento Oblíquo com Resistência do Ar")
 clock = pygame.time.Clock()
 
-# Configuração da imagem
-img_canhao = pygame.image.load('canhao.png')  # Substitua pelo nome correto do arquivo da seta
-img_canhao = pygame.transform.scale(img_canhao, (60, 60))  # Ajuste o tamanho da seta, se necessário
+# Configuração da imagem do canhão
+img_canhao = pygame.image.load('canhao.png')
+img_canhao = pygame.transform.scale(img_canhao, (60, 60))  
+
+# Variáveis e configuração dos sliders de velocidade inicial e resistência do ar
+slider_tam = 200
+slider_h = 10
+sliderVel_x = 50
+sliderVel_y = 50
+
+sliderVel_rect = pygame.Rect(sliderVel_x, sliderVel_y, slider_tam, slider_h)  
+sliderVel_handle = pygame.Rect(sliderVel_x+(vel_inicial*2), sliderVel_y-5, 20, 20)  
+sliderVel_min = sliderVel_x
+sliderVel_max = sliderVel_x + slider_tam
+
+sliderAtr_x = 50
+sliderAtr_y = 120
+
+sliderAtr_rect = pygame.Rect(sliderAtr_x, sliderAtr_y, slider_tam, slider_h)  
+sliderAtr_handle = pygame.Rect(sliderAtr_x+(omega*20), sliderAtr_y-5, 20, 20)  
+sliderAtr_min = sliderAtr_x
+sliderAtr_max = sliderAtr_x + slider_tam  
 
 # Funções
 
 def calcula_trajetoria(tempo):
+     """
+     Calcula a posição da bola ao longo do tempo, considerando o ângulo inicial,
+     velocidade inicial e resistência do ar.
+
+     Parâmetros:
+     - tempo (float): O tempo em segundos para o qual a posição será calculada.
+
+     Retorna:
+     - tuple[float, float]: Coordenadas da posição (x, y) da bolinha.
+     """
      angulo_rad = numpy.radians(angulo)
 
      pos_x = (vel_inicial*numpy.cos(angulo_rad)*(1-numpy.exp(-omega*tempo)))/omega
@@ -60,6 +106,13 @@ def calcula_trajetoria(tempo):
      return pos_x, pos_y
 
 def desenha_tela():
+    """
+    Desenha todos os elementos da tela, incluindo o canhão, a bola, sliders,
+    informações textuais, obstáculos e alvos. Também verifica colisão entre
+    a bola e o obstáculo.
+
+    Não possui parâmetros ou retorno.
+    """
     global colisao
     cor_tela = (153, 201, 239)
     tela.fill(cor_tela)
@@ -81,7 +134,6 @@ def desenha_tela():
     texto_Info()
     desenha_barco()
 
-    # Desenha o obstáculo se necessário
     if flag == 1:
           obstaculo = pygame.Rect(obstaculo_x, obstaculo_y, obstaculo_larg, obstaculo_alt) 
           desenha_obstaculo(obstaculo)
@@ -93,18 +145,31 @@ def desenha_tela():
                raio_bola * 2                  
           )
 
-          # Verifica se há colisão entre a bola e o obstáculo
+          # Verifica colisão
           if bola_rect.colliderect(obstaculo) == True:
                colisao = True
 
 
-# Função para desenhar o alvo (barco)
 def desenha_barco():
+    """
+    Desenha a imagem do alvo (barco) em sua posição predefinida.
+
+    Não possui parâmetros ou retorno.
+    """
     barco_img = pygame.image.load('barco.png')  
     barco_img = pygame.transform.scale(barco_img, (180, 180))
     tela.blit(barco_img, (quad.x, quad.y-40))  
 
 def desenhar_seta(origem, comp):
+     """
+    Desenha uma seta rotacionada que representa a direção do disparo.
+
+    Parâmetros:
+    - origem (tuple[int, int]): Coordenadas da base do canhão (ponto inicial da seta).
+    - comp (float): Comprimento da seta em pixels.
+
+    Não possui retorno.
+    """
      angulo_rad = numpy.radians(angulo_)
      # Desenha a reta
      dest = (
@@ -115,9 +180,9 @@ def desenhar_seta(origem, comp):
 
      # Seta sem rotação
      base_pontos = [
-          (0, -altura_seta // 2),  # Ponta superior
-          (-largura_seta // 2, altura_seta // 2),  # Inferior esquerdo
-          (largura_seta // 2, altura_seta // 2)  # Inferior direito
+          (0, -altura_seta // 2),  
+          (-largura_seta // 2, altura_seta // 2), 
+          (largura_seta // 2, altura_seta // 2)  
      ]
 
      angulo_seta = angulo_ + 90
@@ -128,73 +193,94 @@ def desenhar_seta(origem, comp):
      for px, py in base_pontos:
           x_rot = px * math.cos(angulo_seta_rad) - py * math.sin(angulo_seta_rad)
           y_rot = px * math.sin(angulo_seta_rad) + py * math.cos(angulo_seta_rad)
-          pontos_rotacionados.append((x_rot + dest[0], -y_rot + dest[1]))  # Ajusta para o centro (x, y)
+          pontos_rotacionados.append((x_rot + dest[0], -y_rot + dest[1]))  
 
-     # Desenha o polígono
      pygame.draw.polygon(tela, "black", pontos_rotacionados)
 
-
-# Variáveis do slider para velocidade inicial
-slider_tam = 200
-slider_h = 10
-sliderVel_x = 50
-sliderVel_y = 50
-
-sliderVel_rect = pygame.Rect(sliderVel_x, sliderVel_y, slider_tam, slider_h)  # Posição e tamanho da barra
-sliderVel_handle = pygame.Rect(sliderVel_x+(vel_inicial*2), sliderVel_y-5, 20, 20)  # Controle do slider
-sliderVel_min = sliderVel_x
-sliderVel_max = sliderVel_x + slider_tam  # Valores mínimo e máximo do slider
-
-# Variáveis do slider para resistência do ar
-sliderAtr_x = 50
-sliderAtr_y = 120
-
-sliderAtr_rect = pygame.Rect(sliderAtr_x, sliderAtr_y, slider_tam, slider_h)  # Posição e tamanho da barra
-sliderAtr_handle = pygame.Rect(sliderAtr_x+(omega*20), sliderAtr_y-5, 20, 20)  # Controle do slider
-sliderAtr_min = sliderAtr_x
-sliderAtr_max = sliderAtr_x + slider_tam  # Valores mínimo e máximo do slider
-
-# Quadrado alvo
-quad = pygame.Rect(800, 500, 50, 50)
-# obstaculo = pygame.Rect(obstaculo_x, obstaculo_y, obstaculo_larg, obstaculo_larg) 
-
 def desenha_quadrado():
+     """
+     Desenha um quadrado para referência da posição do alvo.
+
+     Não possui parâmetros ou retorno.
+     """
      pygame.draw.rect(tela, "black", quad)
 
 def desenha_obstaculo(obstaculo):
-     pygame.draw.rect(tela, "black", obstaculo)
-     palmeira_img = pygame.image.load('palmeira.png')  # Carrega a imagem da palmeira
-     palmeira_img = pygame.transform.scale(palmeira_img, (250, 300))  # Ajusta o tamanho da imagem para o tamanho do obstáculo
-     tela.blit(palmeira_img, (obstaculo.x-80, obstaculo.y-20))  # Desenha a imagem na posição do obstáculo
+     """
+     Desenha um retângulo para referência da posição do obstáculo.
 
-# Função para desenhar o slider
+     Não possui parâmetros ou retorno.
+     """
+     pygame.draw.rect(tela, "black", obstaculo)
+     palmeira_img = pygame.image.load('palmeira.png')  
+     palmeira_img = pygame.transform.scale(palmeira_img, (250, 300))  # Ajusta o tamanho
+     tela.blit(palmeira_img, (obstaculo.x-80, obstaculo.y-20))  
+
 def desenha_slider_vel():
-    pygame.draw.rect(tela, "gray", sliderVel_rect)  # Barra do slider
-    pygame.draw.rect(tela, "red", sliderVel_handle)  # Controle do slider
+    """
+    Desenha o slider que ajusta a velocidade inicial do disparo.
+
+    Não possui parâmetros ou retorno.
+    """
+
+    pygame.draw.rect(tela, "gray", sliderVel_rect)  
+    pygame.draw.rect(tela, "red", sliderVel_handle) 
 
 def desenha_slider_atr():
-    pygame.draw.rect(tela, "gray", sliderAtr_rect)  # Barra do slider
-    pygame.draw.rect(tela, "red", sliderAtr_handle)  # Controle do slider
+    """
+    Desenha o slider que ajusta o coeficiente de resistência do ar.
 
+    Não possui parâmetros ou retorno.
+    """
+    pygame.draw.rect(tela, "gray", sliderAtr_rect)  
+    pygame.draw.rect(tela, "red", sliderAtr_handle) 
 
-# Funções para renderizar os textos
 def texto_Vel(value):
+    """
+    Exibe o valor atual da velocidade inicial abaixo do slider correspondente.
+
+    Parâmetros:
+    - value (float): Velocidade inicial em m/s.
+
+    Não possui retorno.
+    """
     font = pygame.font.SysFont("Arial", 20)
     text = font.render(f'Velocidade Inicial: {value:.1f} m/s', True, (0, 0, 0))
-    tela.blit(text, (sliderVel_x + slider_tam // 2 - text.get_width() // 2, sliderVel_y + slider_h + 10)) # Posição do texto
+    tela.blit(text, (sliderVel_x + slider_tam // 2 - text.get_width() // 2, sliderVel_y + slider_h + 10)) 
 
 def texto_Atr(value):
+    """
+    Exibe o valor atual da resistência do ar abaixo do slider correspondente.
+
+    Parâmetros:
+    - value (float): Coeficiente de resistência do ar em s⁻¹.
+
+    Não possui retorno.
+    """
     font = pygame.font.SysFont("Arial", 20)
     text = font.render(f'Resistência do Ar: {value:.1f} s⁻¹', True, (0, 0, 0))
-    tela.blit(text, (sliderAtr_x + slider_tam // 2 - text.get_width() // 2, sliderAtr_y + slider_h + 10)) # Posição do texto
+    tela.blit(text, (sliderAtr_x + slider_tam // 2 - text.get_width() // 2, sliderAtr_y + slider_h + 10)) 
 
 def texto_Info():
+    """
+    Exibe as instruções de como jogar na parte superior da tela.
+
+    Não possui parâmetros ou retorno.
+    """
     font = pygame.font.SysFont("Arial", 20)
-    text = font.render(f'Pressione ESPAÇO para atirar!', True, (0, 0, 0))
+    text = font.render(f'Use as setas CIMA/BAIXO para mover o canhão.', True, (0, 0, 0))
+    text2 = font.render(f'Pressione ESPAÇO para atirar!', True, (0, 0, 0))
     tela.blit(text, (350, 30)) # Posição do texto
+    tela.blit(text2, (420, 60)) # Posição do texto
 
 # Funções para verificar as colisões
 def colisao_alvo():
+    """
+    Verifica se a bola colidiu com o alvo (quadrado/barco).
+
+    Retorna:
+    - bool: `True` se houver colisão, `False` caso contrário.
+    """
     # Cria o retângulo da bola com base na posição e raio da bola
     bola_rect = pygame.Rect(
         pos_bola_conv[0] - raio_bola,  
@@ -206,26 +292,14 @@ def colisao_alvo():
     # Verifica colisão
     return pygame.Rect.colliderect(quad, bola_rect)
 
-def colisao_obst():
-    # Cria o retângulo da bola com base na posição e raio da bola
-    bola_rect = pygame.Rect(
-        pos_bola_conv[0] - raio_bola,  
-        pos_bola_conv[1] - raio_bola,  
-        raio_bola * 2,                 
-        raio_bola * 2                  
-    )
-
-    # Cria o retângulo do obstáculo
-    obstaculo = pygame.Rect(obstaculo_x, obstaculo_y, obstaculo_larg, obstaculo_alt) 
-    
-    # Debugging: verifique as posições
-    print(f"Bola: {bola_rect}, Obstáculo: {obstaculo}")
-    
-    # Verifica se há colisão entre o retângulo da bola e o retângulo do obstáculo
-    return bola_rect.colliderect(obstaculo)
-
 
 def main():
+     """
+     Função principal que inicializa o programa, gerencia o loop principal e 
+     controla a interação do usuário com a simulação.
+
+     Não possui parâmetros ou retorno.
+     """
      global angulo, angulo_, tempo, vel_inicial, vel_inicial_, omega, cor, pos_bola_conv, contar_tempo, pontuacao, flag, colisao
      sair = False
      dragging_vel = False
@@ -259,28 +333,30 @@ def main():
                if evento.type == pygame.QUIT:  # Fechar o programa
                     sair = True
                if evento.type == pygame.MOUSEBUTTONDOWN:
-                    if sliderVel_handle.collidepoint(evento.pos):  # Verifica se clicou no controle
+                    if sliderVel_handle.collidepoint(evento.pos):  # Verifica se clicou no controle de velocidade
                          dragging_vel = True
-                    if sliderAtr_handle.collidepoint(evento.pos):  # Verifica se clicou no controle
+                    if sliderAtr_handle.collidepoint(evento.pos):  # Verifica se clicou no controle de atrito do ar
                          dragging_atr = True
+
                if evento.type == pygame.MOUSEBUTTONUP:
                     dragging_vel = False
                     dragging_atr = False
+
                if evento.type == pygame.MOUSEMOTION:
                     if dragging_vel:
-                         # Atualizar a posição do controle do slider
                          new_x_vel = max(sliderVel_min, min(evento.pos[0], sliderVel_max - sliderVel_handle.width))
                          sliderVel_handle.x = new_x_vel
-                         vel_inicial_ = (new_x_vel - sliderVel_min)*0.5
+                         vel_inicial_ = (new_x_vel - sliderVel_min)*0.5    # Ajusta a velocidade
+                         
                     if dragging_atr:
-                         # Atualizar a posição do controle do slider
                          new_x_atr = max(sliderAtr_min, min(evento.pos[0], sliderAtr_max - sliderAtr_handle.width))
                          sliderAtr_handle.x = new_x_atr
-                         omega = max(0.001, (new_x_atr - sliderAtr_min)*0.05)
+                         omega = max(0.001, (new_x_atr - sliderAtr_min)*0.05)   # Ajusta o atrito do ar
 
           teclas = pygame.key.get_pressed()
 
-          if teclas[pygame.K_UP] and angulo_ < 90:
+          # Controle de ângulo e disparo
+          if teclas[pygame.K_UP] and angulo_ < 90:     
                angulo_ += 1
 
           if teclas[pygame.K_DOWN] and angulo_ > 0:
