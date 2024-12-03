@@ -115,7 +115,7 @@ $x_{0}=x_{1} \Rightarrow \frac{v_{0}\cos\theta}{\omega_{0}}\cdot(1-e^{-\omega_{0
 
 </div>
 
-Com isso, concluímos que é necessário multiplicar o valor da velocidade por $\cos\theta\ \cos(\theta+\alpha)$
+Com isso, concluímos que é necessário multiplicar o valor da velocidade por $\cos\theta$ \ $\cos(\theta+\alpha).$
 
 ## Implementação
 
