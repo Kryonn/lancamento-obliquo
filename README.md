@@ -236,3 +236,7 @@ Portanto, com esse resultado, podemos concluir que, para que o pirata consiga at
       Beatriz Alves dos Santos
       Kevin Ryoji Nakashima
       Eduardo Neves Gomes da Silva
+
+## Referências
+
+Bernardes, E. de S. (2024). Dinâmica-v4 (Notas de aula). 7600105 - Física Básica I. Universidade de São Paulo, São Carlos.
