@@ -24,7 +24,7 @@ A figura a seguir nos mostra o modelo geral de um lançamento oblíquo, sendo $\
 
 <div align="center">
 
-![null(2)](https://github.com/user-attachments/assets/1c595f59-368a-43de-b5b1-eb050c24990e)
+![null (1)](https://github.com/user-attachments/assets/a515d8be-9100-4c87-bbfa-41bf3d5d6769)
 
 </div>
 
