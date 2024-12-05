@@ -226,7 +226,6 @@ Portanto, com esse resultado, podemos concluir que, para que o pirata consiga at
 
    **Configuração e Uso:** Parâmetros iniciais podem ser ajustados:
     - Velocidade inicial - basta mexer na barra que aparece com o mouse.
-    - Resistência do ar - basta mexer na barra que aparece com o mouse.
     - Ângulo do lançamento - com as seta para cima ou para baixo ajuste o ângulo.
 
   - **Informações sobre o projeto:**
