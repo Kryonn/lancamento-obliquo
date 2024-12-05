@@ -67,7 +67,7 @@ img_canhao = pygame.transform.scale(img_canhao, (60, 60))
 slider_tam = 200
 slider_h = 10
 sliderVel_x = 50
-sliderVel_y = 50
+sliderVel_y = 30
 
 sliderVel_rect = pygame.Rect(sliderVel_x, sliderVel_y, slider_tam, slider_h)  
 sliderVel_handle = pygame.Rect(sliderVel_x+(vel_inicial*2), sliderVel_y-5, 20, 20)  
@@ -75,7 +75,7 @@ sliderVel_min = sliderVel_x
 sliderVel_max = sliderVel_x + slider_tam
 
 sliderAtr_x = 50
-sliderAtr_y = 120
+sliderAtr_y = 100
 
 sliderAtr_rect = pygame.Rect(sliderAtr_x, sliderAtr_y, slider_tam, slider_h)  
 sliderAtr_handle = pygame.Rect(sliderAtr_x+(omega_*20), sliderAtr_y-5, 20, 20)  
@@ -125,6 +125,7 @@ def desenha_tela():
      desenha_slider_atr()
      texto_Atr(omega_)
      texto_Info()
+     texto_Ang(angulo)
      desenha_quadrado()
      desenha_barco()
 
@@ -237,6 +238,19 @@ def desenha_slider_atr():
     """
     pygame.draw.rect(tela, "gray", sliderAtr_rect)  
     pygame.draw.rect(tela, "red", sliderAtr_handle) 
+
+def texto_Ang(value):
+    """
+    Exibe o valor atual do ângulo do canhõa em relação a terra.
+
+    Parâmetros:
+    - value (float): Ângilo em graus.
+
+    Não possui retorno.
+    """
+    font = pygame.font.SysFont("Arial", 20)
+    text = font.render(f'Ângulo do canhão: {value:.1f}°', True, (0, 0, 0))
+    tela.blit(text, (sliderAtr_x + slider_tam // 2 - text.get_width() // 2, sliderAtr_y + slider_h + 40)) 
 
 def texto_Vel(value):
     """
@@ -372,10 +386,10 @@ def main():
 
           # Controle de ângulo e disparo
           if teclas[pygame.K_UP] and angulo_ < 90:     
-               angulo_ += 1
+               angulo_ += 0.5
 
           if teclas[pygame.K_DOWN] and angulo_ > 0:
-               angulo_ -= 1
+               angulo_ -= 0.5
           
           if teclas[pygame.K_SPACE]:
                contar_tempo = True
