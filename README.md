@@ -18,7 +18,7 @@ Vamos começar com uma contextualização: um pirata percebe que tem um inimigo 
 
 O movimento oblíquo, diferente da queda livre, possui duas direções de movimento, sendo, nesse caso, o eixo x referente ao eixo horizontal e o eixo y ao eixo vertical.
 
-A trajetória é descrita por uma "parábola", mas por que? Isso ocorre devido as forças atuantes durante o movimento. Durante o lançamento, apenas as forças gravitacional($`\vec{F_{g}}`$) e viscosa($`\vec{F_{v}}`$) atuam no objeto, por isso, há uma desaceleração, por conta de $`\vec{F_{v}}`$, fazendo com que a velocidade diminua em ambos os eixos.
+A trajetória é descrita por uma parábola, mas por que? Isso ocorre devido as forças atuantes durante o movimento. Durante o lançamento, apenas a força gravitacional($`\vec{F_{g}}`$) atua no objeto, por isso, há uma desaceleração da direção do eixo y do movimento, fazendo com que a velocidade diminua, enquanto que, na direção do eixo x do movimento, a velocidade se mantém constante.
 
 A figura a seguir nos mostra o modelo geral de um lançamento oblíquo, sendo $\vec{v_{0}}$ a velocidade inicial do objeto, $\vec{F_{g}}$ a força gravitacional e $\vec{r}$ o vetor posição.
 
@@ -30,13 +30,13 @@ A figura a seguir nos mostra o modelo geral de um lançamento oblíquo, sendo $\
 
 ### Construção das EDOs:
 
-Temos a trajetória, mas como transformamos o desenho em física de fato? 
+Temos a trajetória, mas como transformamos o desenho em números? 
 
 No sistema acima, atuam as seguintes forças:
 
 <div align="center">
 
-$\vec{F_{g}}=-mg\hat{j}, \ \vec{F_{v}}=-b\vec{v}.$
+$\vec{F_{g}}=-mg\hat{j}.$
 
 </div>
 
@@ -44,7 +44,7 @@ Sabendo disso, usaremos a segunda lei de Newton para conseguirmos montar uma EDO
 
 <div align="center">
 
-$\vec{F_{R}}=\dot{\vec{p}}=m\ddot{x}\hat{i}+m\ddot{y}\hat{j}=-b\dot{x}\hat{i}-b\dot{y}\hat{j}-mg\hat{j}.$
+$\vec{F_{R}}=\dot{\vec{p}}=m\ddot{x}\hat{i}+m\ddot{y}\hat{j}=-mg\hat{j}.$
 
 </div>
 
@@ -52,58 +52,88 @@ Então, ao separarmos a força resultante, ficamos com:
 
 <div align="center">
   
-$m\ddot{x}=-b\dot{x}\Rightarrow\ddot{x}=-\frac{b}{m}\dot{x},$
+$m\ddot{x}=0,$
 
-$m\ddot{y}=-b\dot{y}-mg\Rightarrow\ddot{y}=-\frac{b}{m}\dot{y}-g.$
+$m\ddot{y}=-mg.$
 
 
 </div>
 
-Por mera conveniência, substituiremos $b/m$ por $\omega_{0}$, obtendo as seguintes EDOS:
+Logo, chegamos na seguintes EDOs:
 
 <div align="center">
-  
-$\ddot{x}=-\frac{b}{m}\dot{x}=-\omega_{0}\dot{x},$
 
-$\ddot{y}=-\frac{b}{m}\dot{y}-g=-\omega_{0}\dot{y}-g.$
+$\ddot{x}=0,$
+
+$\ddot{y}=-g.$
 
 </div>
 
 ### Resolução das EDOs:
 
-Nosso objetivo é, a partir das EDOS encontradas, obtermos as funções horárias no eixo x e y. Por enquanto, trabalharemos apenas com a EDO relativa ao eixo x.
-
-Em relação ao eixo x, temos:
+Nosso objetivo, resolvendo as EDOs, é determinar a função horária do movimento. Para isso, começaremos obtendo x:
 
 <div align="center">
-  
-$\ddot{x}=-\omega_{0}\dot{x}.$
+
+$\ddot{x}=0 \Rightarrow \dot{x}=C.$
 
 </div>
 
-Isso significa que precisamos de uma função da qual a segunda derivada é proporcional à primeira derivada dela. Para começarmos os cálculos, reescreveremos a EDO e integraremos os dois lados da igualdade:
+Porém, sabemos que $\dot{x}(0)=v_{0}.\cos\theta$, por isso, para obter $C$, faremos uma substituição:
 
 <div align="center">
-  
-$\dfrac{d\dot{x}}{dt}=-\omega_{0}\dot{x}\Rightarrow \int\dfrac{d\dot{x}}{\dot{x}}=-\omega_{0}\int dt\Rightarrow ln\dot{x}=-\omega_{0}t + C^{'}\Rightarrow \dot{x}=e^{-\omega_{0}t}.e^{C^{'}}\Rightarrow \dot{x}=e^{-\omega_{0}t}.C.$
+
+$\dot{x}=C \Rightarrow \dot{x}=v_{0}.\cos\theta.$
 
 </div>
 
-Porém, precisamos descobrir o valor de $C$, para que a função de $\dot{x}$ esteja completa. Para isso, já que sabemos que $\dot{x}(0)=0$, igualaremos $\dot{x}(t)=0$, em $t=0$:
+Agora que temos $dot{x}$, podemos integrar novamente, para obtermos $x$:
 
 <div align="center">
-  
-$\dot{x}=e^{-\omega_{0}t}.C, \dot{x}(0)=v_{0}\cos \theta \Rightarrow \dot{x}=v_{0}\cos \theta.e^{-\omega_{0}t}.$
+
+$\dot{x}=v_{0}.\cos \theta \Rightarrow x=v_{0}.\cos \theta t+C.$
 
 </div>
 
-Com isso, conseguimos obter $\dot{x}$. Agora, para obtermos $x$ e $y$, faremos o mesmo procedimento, obtendo os seguintes resultados:
+Mas, sabemos que $x(0)=0$. Fazendo a substituição, ficamos com:
 
 <div align="center">
-  
-$x=-\frac{v_{0}\cos \theta}{\omega_{0}}(1-e^{-\omega_{0} t}),$
 
-$y=\frac{1}{\omega_{0}}(v_{0}\sin \theta+\frac{g}{\omega_{0}})(1-e^{-\omega_{0}t})-\frac{gt}{\omega_{0}}.$
+$x=v_{0}.\cos \theta t+C \Rightarrow x=v_{0}.\cos \theta t.$
+
+</div>
+
+Temos a função horária do movimento no eixo x. Agora, resolveremos a EDO relativa ao eixo y. Para isso, faremos o mesmo procedimento realizado no eixo x, começaremos integrando:
+
+<div align="center">
+
+$\ddot{y}=-g \Rightarrow \dot{y}=-gt+C.$
+
+</div>
+
+Sabemos que $\dot{y}(0)=v_{0}.\sin \theta$, com isso podemos substituir $C$:
+
+<div align="center">
+
+$\dot{y}=-gt+C \Rightarrow \dot{y}=-gt+v_{0}.\sin \theta.$
+
+</div>
+
+Por fim, faremos a última integração e substituição para obter $y$:
+
+<div align="center">
+
+$\dot{y}=-gt+v_{0}.\sin \theta \Rightarrow y=-\frac{gt^{2}}{2}+v_{0}.\sin \theta t + C,y(0)=0 \Rightarrow y=-\frac{gt^{2}}{2}+v_{0}.\sin \theta t$
+
+</div>
+
+Portanto, a nossa trajetória é descrita por essas duas funções horárias:
+
+<div align="center">
+
+$x=v_{0}.\cos \theta t,$
+
+$y=v_{0}.\sin \theta t-\frac{gt^{2}}{2}.$
 
 </div>
 
@@ -117,15 +147,59 @@ Mas afinal, quais são as respostas para as dúvidas do pirata? Para entendermos
 
 </div>
 
-Sabendo disso, vem a seguinte pergunta: o quanto ele precisa aumentar de pólvora no canhão, para que consiga atingir o inimigo? Para responder essa pergunta, vamos começar considerando $x_{0}$ como a distância do inimigo no dia anterior e $x_{1}$ a distância do inimigo no dia seguinte. Sabemos que a distância permanece a mesma em ambos os dias, por isso igualaremos:
+Sabendo disso, vem a seguinte pergunta: o quanto ele precisa aumentar de pólvora no canhão, para que consiga atingir o inimigo? Para responder essa pergunta, vamos começar obtendo o tempo de queda do lançamento ($t_{q}$). Para isso, igualaremos a função relativa a posição no eixo y, quando $t=t_{q}$, a zero, uma vez que, no fim da trajetória, a altura é nula.
 
 <div align="center">
-  
-$x_{0}=x_{1} \Rightarrow \frac{v_{0}\cos\theta}{\omega_{0}}\cdot(1-e^{-\omega_{0}t})=\frac{v_{1}\cos(\theta+\alpha)}{\omega_{0}}\cdot(1-e^{-\omega_{0}t})\Rightarrow v_{0}\cos\theta=v_{1}\cos(\theta+\alpha)\Rightarrow v_{1}=v_{0}\frac{\cos\theta}{\cos(\theta+\alpha)}$
+
+$y(t_{q})=v_{0}.\sin \theta t_{q}-\frac{gt_{q}^{2}}{2}=0 \Rightarrow t_{q}(v_{0}\sin \theta - \frac{gt_{q}}{2})=0.$
 
 </div>
 
-Com isso, concluímos que é necessário multiplicar o valor da velocidade por $\cos\theta / \cos(\theta+\alpha).$
+Em uma multiplicação, só resulta em zero caso um dos fatores é zero. Logo, $t_{q}=0$ ou $v_{0}\sin \theta - \frac{gt_{q}}{2}=0$, se $t_{q}=0$, então não terá trajetória, então concluímos que $v_{0}\sin \theta - \frac{gt_{q}}{2}=0$. Ao isolarmos $t_{q}$, ficamos com:
+
+<div align="center">
+
+$v_{0}\sin \theta - \frac{gt_{q}}{2}=0 \Rightarrow t_{q}=\frac{2v_{0}.\sin \theta}{g}.$
+
+</div>
+
+Porém, precisamos calcular o tempo de queda, tanto do primeiro dia, quanto do segundo. Por isso, vamos considerar $t_{1}$ e $t_{2}$ como tempo de queda do primeiro e do segundo dia, e $v_{1}$ e $v_{2}$, como velocidade inicial no primeiro e no segundo dia, respectivamente. Então, temos que:
+
+<div align="center">
+
+$t_{1}=\frac{2v_{1}.\sin (\theta)}{g},$
+
+$t_{2}=\frac{2v_{2}.\sin (\theta+\phi)}{g}.$
+
+</div>
+
+Agora, tendo o tempo de queda em mãos, é possível calcular o quanto da velocidade é necessário aumentar. Para isso, consideraremos que $x_{1}$ é a distância entre o barco do pirata e o inimigo no primeiro dia e que $x_{2}$ é a distância no segundo dia:
+
+<div align="center">
+
+$x_{1}=v_{1}.\cos\theta t_{1},$
+
+$x_{2}=v_{2}.\cos(\theta+\phi) t_{2}.$
+
+</div>
+
+Mas, segundo o problema, a distância em ambos os dias eram iguais, logo podemos igualar as expressões:
+
+<div align="center">
+
+$x_{1}=x_{2} \Rightarrow v_{1}.\cos\theta t_{1}=v_{2}.\cos(\theta+\phi) t_{2}$
+
+</div>
+
+Substituindo os valores de $t_{1}$ e $t_{2}$ e isolando $v_{2}$, ficamos com:
+
+<div align="center">
+
+$v_{1}.\cos\theta t_{1}=v_{2}.\cos(\theta+\phi) t_{2} \Rightarrow \frac{v_{1}.\cos\theta.v_{1}\sin\theta}{g}=\frac{v_{2}.\cos(\theta+\phi).v_{2}\sin(\theta + \phi)}{g} \Rightarrow v_{2}^{2}=v_{1}^{2}.\frac{\cos\theta\sin \theta}{\cos(\theta + \phi)\sin(\theta+\phi)} \Rightarrow v_{2}=v_{1}.\sqrt{\frac{\cos\theta\sin \theta}{\cos(\theta + \phi)\sin(\theta+\phi)}}.$
+
+</div>
+
+Portanto, com esse resultado, pode concluir que, para que o pirata consiga atingir o inimigo aumentando $\phi$ graus de angulação, será necessário aumentar $\sqrt{\cos\theta\sin \theta}$ / $\sqrt{\cos(\theta + \phi)\sin(\theta+\phi)}$ vezes o número de pólvora no canhão.
 
 ## Implementação
 
