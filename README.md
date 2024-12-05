@@ -147,7 +147,7 @@ Mas afinal, quais são as respostas para as dúvidas do pirata? Para entendermos
 
 </div>
 
-Sabendo disso, vem a seguinte pergunta: o quanto ele precisa aumentar de pólvora no canhão, para que consiga atingir o inimigo? Para responder essa pergunta, vamos começar obtendo o tempo de queda do lançamento ($t_{q}$). Para isso, igualaremos a função relativa a posição no eixo y, quando $t=t_{q}$, a zero, uma vez que, no fim da trajetória, a altura é nula.
+Sabendo disso, vem a seguinte pergunta: o quanto ele precisa aumentar de pólvora(proporcional a velocidade inicial) no canhão, para que consiga atingir o inimigo? Para responder essa pergunta, vamos começar obtendo o tempo de queda do lançamento ($t_{q}$). Para isso, igualaremos a função relativa a posição no eixo y, quando $t=t_{q}$, a zero, uma vez que, no fim da trajetória, a altura é nula.
 
 <div align="center">
 
@@ -187,7 +187,7 @@ Mas, segundo o problema, a distância em ambos os dias eram iguais, logo podemos
 
 <div align="center">
 
-$x_{1}=x_{2} \Rightarrow v_{1}.\cos\theta t_{1}=v_{2}.\cos(\theta+\phi) t_{2}$
+$x_{1}=x_{2} \Rightarrow v_{1}.\cos\theta t_{1}=v_{2}.\cos(\theta+\phi) t_{2}.$
 
 </div>
 
@@ -199,7 +199,7 @@ $v_{1}.\cos\theta t_{1}=v_{2}.\cos(\theta+\phi) t_{2} \Rightarrow \frac{v_{1}.\c
 
 </div>
 
-Portanto, com esse resultado, pode concluir que, para que o pirata consiga atingir o inimigo aumentando $\phi$ graus de angulação, será necessário aumentar $\sqrt{\cos\theta\sin \theta}$ / $\sqrt{\cos(\theta + \phi)\sin(\theta+\phi)}$ vezes o número de pólvora no canhão.
+Portanto, com esse resultado, podemos concluir que, para que o pirata consiga atingir o inimigo aumentando $\phi$ graus de angulação, será necessário aumentar $\sqrt{\cos\theta\sin \theta}$ / $\sqrt{\cos(\theta + \phi)\sin(\theta+\phi)}$ vezes o número de pólvora no canhão.
 
 ## Implementação
 
