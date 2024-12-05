@@ -28,6 +28,8 @@ A figura a seguir nos mostra o modelo geral de um lançamento oblíquo, sendo $\
 
 </div>
 
+### Construção das EDOs:
+
 Temos a trajetória, mas como transformamos o desenho em física de fato? 
 
 No sistema acima, atuam as seguintes forças:
@@ -66,6 +68,8 @@ $\ddot{x}=-\frac{b}{m}\dot{x}=-\omega_{0}\dot{x},$
 $\ddot{y}=-\frac{b}{m}\dot{y}-g=-\omega_{0}\dot{y}-g.$
 
 </div>
+
+### Resolução das EDOs:
 
 Nosso objetivo é, a partir das EDOS encontradas, obtermos as funções horárias no eixo x e y. Por enquanto, trabalharemos apenas com a EDO relativa ao eixo x.
 
@@ -106,6 +110,12 @@ $y=\frac{1}{\omega_{0}}(v_{0}\sin \theta+\frac{g}{\omega_{0}})(1-e^{-\omega_{0}t
 ### O Problema do Pirata
 
 Mas afinal, quais são as respostas para as dúvidas do pirata? Para entendermos melhor a situação, usaremos uma simulação/jogo. Com ela, é possível, a partir da mudança na angulação do canhão, notar que, se houver a manutenção da velocidade inicial, não será possível atingir o inimigo.
+
+<div align="center">
+
+![traj](https://github.com/user-attachments/assets/6e9ee1d3-6bd3-443e-b93d-241751240da8)
+
+</div>
 
 Sabendo disso, vem a seguinte pergunta: o quanto ele precisa aumentar de pólvora no canhão, para que consiga atingir o inimigo? Para responder essa pergunta, vamos começar considerando $x_{0}$ como a distância do inimigo no dia anterior e $x_{1}$ a distância do inimigo no dia seguinte. Sabemos que a distância permanece a mesma em ambos os dias, por isso igualaremos:
 
