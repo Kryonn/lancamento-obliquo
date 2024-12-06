@@ -207,6 +207,91 @@ $Ang_{1}=42°, v_{1}=21 m/s, Ang_{2}=76°, v_{2}=?$
 
 </div>
 
+### Resistência do ar
+
+O lançamento oblíquo possui uma variação em que inclui a resistência do ar na descrição da trajetória. A resistência, mais conhecida como força viscosa, atua de maneira contrária à velocidade, sendo uma força dissipativa. O processo para obter as expressões relativas a descrição do movimento é o mesmo: montar as EDOs e depois resolvê-las.
+
+### Construção das EDOs:
+
+Temos a trajetória, mas como transformamos o desenho em física de fato? 
+
+No sistema acima, atuam as seguintes forças:
+
+<div align="center">
+
+$\vec{F_{g}}=-mg\hat{j}, \ \vec{F_{v}}=-b\vec{v}.$
+
+</div>
+
+Sabendo disso, usaremos a segunda lei de Newton para conseguirmos montar uma EDO do movimento:
+
+<div align="center">
+
+$\vec{F_{R}}=\dot{\vec{p}}=m\ddot{x}\hat{i}+m\ddot{y}\hat{j}=-b\dot{x}\hat{i}-b\dot{y}\hat{j}-mg\hat{j}.$
+
+</div>
+
+Então, ao separarmos a força resultante, ficamos com:
+
+<div align="center">
+  
+$m\ddot{x}=-b\dot{x}\Rightarrow\ddot{x}=-\frac{b}{m}\dot{x},$
+
+$m\ddot{y}=-b\dot{y}-mg\Rightarrow\ddot{y}=-\frac{b}{m}\dot{y}-g.$
+
+
+</div>
+
+Por mera conveniência, substituiremos $b/m$ por $\omega_{0}$, obtendo as seguintes EDOS:
+
+<div align="center">
+  
+$\ddot{x}=-\frac{b}{m}\dot{x}=-\omega_{0}\dot{x},$
+
+$\ddot{y}=-\frac{b}{m}\dot{y}-g=-\omega_{0}\dot{y}-g.$
+
+</div>
+
+### Resolução das EDOs:
+
+Nosso objetivo é, a partir das EDOS encontradas, obtermos as funções horárias no eixo x e y. Por enquanto, trabalharemos apenas com a EDO relativa ao eixo x.
+
+Em relação ao eixo x, temos:
+
+<div align="center">
+  
+$\ddot{x}=-\omega_{0}\dot{x}.$
+
+</div>
+
+Isso significa que precisamos de uma função da qual a segunda derivada é proporcional à primeira derivada dela. Para começarmos os cálculos, reescreveremos a EDO e integraremos os dois lados da igualdade:
+
+<div align="center">
+  
+$\dfrac{d\dot{x}}{dt}=-\omega_{0}\dot{x}\Rightarrow \int\dfrac{d\dot{x}}{\dot{x}}=-\omega_{0}\int dt\Rightarrow ln\dot{x}=-\omega_{0}t + C^{'}\Rightarrow \dot{x}=e^{-\omega_{0}t}.e^{C^{'}}\Rightarrow \dot{x}=e^{-\omega_{0}t}.C.$
+
+</div>
+
+Porém, precisamos descobrir o valor de $C$, para que a função de $\dot{x}$ esteja completa. Para isso, já que sabemos que $\dot{x}(0)=0$, igualaremos $\dot{x}(t)=0$, em $t=0$:
+
+<div align="center">
+  
+$\dot{x}=e^{-\omega_{0}t}.C, \dot{x}(0)=v_{0}\cos \theta \Rightarrow \dot{x}=v_{0}\cos \theta.e^{-\omega_{0}t}.$
+
+</div>
+
+Com isso, conseguimos obter $\dot{x}$. Agora, para obtermos $x$ e $y$, faremos o mesmo procedimento, obtendo os seguintes resultados:
+
+<div align="center">
+  
+$x=-\frac{v_{0}\cos \theta}{\omega_{0}}(1-e^{-\omega_{0} t}),$
+
+$y=\frac{1}{\omega_{0}}(v_{0}\sin \theta+\frac{g}{\omega_{0}})(1-e^{-\omega_{0}t})-\frac{gt}{\omega_{0}}.$
+
+</div>
+
+
+
 ## Implementação
 
 - **Linguagens e Pacotes:**  
