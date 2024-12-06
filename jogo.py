@@ -17,7 +17,6 @@ Este projeto faz parte do processo avaliativo da disciplina 7600105 - Física B�
 
 import pygame # type: ignore
 import numpy
-import math
 
 # Variáveis gerais
 pontuacao = 0
@@ -269,8 +268,8 @@ def desenhar_seta(origem, comp):
      # Seta rotacionada
      pontos_rotacionados = []
      for px, py in base_pontos:
-          x_rot = px * math.cos(angulo_seta_rad) - py * math.sin(angulo_seta_rad)
-          y_rot = px * math.sin(angulo_seta_rad) + py * math.cos(angulo_seta_rad)
+          x_rot = px * numpy.cos(angulo_seta_rad) - py * numpy.sin(angulo_seta_rad)
+          y_rot = px * numpy.sin(angulo_seta_rad) + py * numpy.cos(angulo_seta_rad)
           pontos_rotacionados.append((x_rot + dest[0], -y_rot + dest[1]))  
 
      pygame.draw.polygon(tela, "black", pontos_rotacionados)
