@@ -40,11 +40,18 @@ cor = "red"
 
 tempo = 0
 omega = 0.4    # Atrito do ar
-omega_ = 0.4    
+omega_ = 0.4   
 vel_inicial = 20   
 vel_inicial_ = 20 
 g = 9.8
-flag = 0   # Flag para verificação da primeira colisão
+
+# Constante de multiplicação para os sliders
+const_omega = 0.025 
+const_vel = 0.5 
+
+# Flags para indicar o estado dos botões 
+# flag = 0   # Flag para verificação da primeira colisão
+flag_obst = 0   # Flag para verificação da primeira colisão
 flag_atr = 0   # Flag para verificação da inclusão de resistência do ar
 
 obstaculo_x = 450
@@ -79,16 +86,23 @@ sliderAtr_x = 650
 sliderAtr_y = 100
 
 sliderAtr_rect = pygame.Rect(sliderAtr_x, sliderAtr_y, slider_tam, slider_h)  
-sliderAtr_handle = pygame.Rect(sliderAtr_x+(omega_*20), sliderAtr_y-5, 20, 20)  
+sliderAtr_handle = pygame.Rect(sliderAtr_x+(omega_*(1/const_omega)), sliderAtr_y-5, 20, 20)  
 sliderAtr_min = sliderAtr_x
 sliderAtr_max = sliderAtr_x + slider_tam  
 
-# Posição e tamanho do botão
-botao_x = 30
-botao_y = 170
-botao_comp = 300
-botao_h = 40
-botao_rect = pygame.Rect(botao_x, botao_y, botao_comp, botao_h)
+# Configuração do botão de ativar atrito
+botaoAtr_x = 30
+botaoAtr_y = 170
+botaoAtr_comp = 300
+botaoAtr_h = 40
+botaoAtr_rect = pygame.Rect(botaoAtr_x, botaoAtr_y, botaoAtr_comp, botaoAtr_h)
+
+# Configuração do botão de ativar obstáculo
+botaoObst_x = 350
+botaoObst_y = 170
+botaoObst_comp = 200
+botaoObst_h = 40
+botaoObst_rect = pygame.Rect(botaoObst_x, botaoObst_y, botaoObst_comp, botaoObst_h)
 
 textAng_x = 350
 textAng_y = 100
@@ -147,7 +161,8 @@ def desenha_tela():
      desenha_quadrado()
      desenha_barco()
 
-     if flag == 1:
+     if flag_obst == 1:
+          texto_botaoObst = "Remover Obstáculo"
           obstaculo = pygame.Rect(obstaculo_x, obstaculo_y, obstaculo_larg, obstaculo_alt) 
           desenha_obstaculo(obstaculo)
 
@@ -161,16 +176,19 @@ def desenha_tela():
           # Verifica colisão
           if bola_rect.colliderect(obstaculo) == True:
                colisao = True
+     else:
+          texto_botaoObst = "Adicionar Obstáculo"
 
      if flag_atr == 1:
           desenha_slider_atr()
-          texto_botao = "Retirar resistência do ar (bônus)"
+          texto_botaoAtr = "Retirar resistência do ar (bônus)"
           texto_Atr(omega_)
      else:
           omega = 0.00001
-          texto_botao = "Adicionar resistência do ar (bônus)"
+          texto_botaoAtr = "Adicionar resistência do ar (bônus)"
 
-     desenha_botao(texto_botao)
+     desenha_botao_atr(texto_botaoAtr)
+     desenha_botao_obst(texto_botaoObst)
 
      if acerto == 1:
           texto_acerto()
@@ -182,16 +200,28 @@ def desenha_tela():
      rect = imagem_rotacionada.get_rect(center=origem_canhao)
      tela.blit(imagem_rotacionada, rect.topleft)
 
-def desenha_botao(texto):
+def desenha_botao_atr(texto):
      font = pygame.font.SysFont("Arial", 18)
      text_color = pygame.Color('black')
      button_text = font.render(texto, True, text_color)
 
      mouse_pos = pygame.mouse.get_pos()
-     botao_cor = pygame.Color(235,207,95) if botao_rect.collidepoint(mouse_pos) else pygame.Color(252,221,98)
+     botao_cor = pygame.Color(235,207,95) if botaoAtr_rect.collidepoint(mouse_pos) else pygame.Color(252,221,98)
 
-     pygame.draw.rect(tela, botao_cor, botao_rect, border_radius=10)  # Desenha o botão
-     text_rect = button_text.get_rect(center=botao_rect.center)
+     pygame.draw.rect(tela, botao_cor, botaoAtr_rect, border_radius=10)  # Desenha o botão
+     text_rect = button_text.get_rect(center=botaoAtr_rect.center)
+     tela.blit(button_text, text_rect)  # Adiciona o texto no botão
+
+def desenha_botao_obst(texto):
+     font = pygame.font.SysFont("Arial", 18)
+     text_color = pygame.Color('black')
+     button_text = font.render(texto, True, text_color)
+
+     mouse_pos = pygame.mouse.get_pos()
+     botao_cor = pygame.Color(235,207,95) if botaoObst_rect.collidepoint(mouse_pos) else pygame.Color(252,221,98)
+
+     pygame.draw.rect(tela, botao_cor, botaoObst_rect, border_radius=10)  # Desenha o botão
+     text_rect = button_text.get_rect(center=botaoObst_rect.center)
      tela.blit(button_text, text_rect)  # Adiciona o texto no botão
 
 def desenha_barco():
@@ -328,7 +358,7 @@ def texto_Info():
     text = font.render(f'Use as setas CIMA/BAIXO para mover o canhão.', True, (0, 0, 0))
     text2 = font.render(f'Pressione ESPAÇO para atirar!', True, (0, 0, 0))
     pos_x = 280
-    pos_y = 10
+    pos_y = 20
     tela.blit(text, (pos_x, pos_y)) # Posição do texto
     tela.blit(text2, (pos_x+70, pos_y+30)) # Posição do texto
 
@@ -340,7 +370,7 @@ def texto_acerto():
     """
     font = pygame.font.SysFont("Arial", 20)
     text = font.render(f'Você acertou o alvo!', True, "red")
-    tela.blit(text, (500, 120)) # Posição do texto
+    tela.blit(text, (600, 180)) # Posição do texto
 
 # Funções para verificar as colisões
 def colisao_alvo():
@@ -374,10 +404,11 @@ def main():
 
      Não possui parâmetros ou retorno.
      """
-     global flag_atr, acerto, angulo, angulo_, tempo, vel_inicial, vel_inicial_, omega, omega_, cor, pos_bola_conv, contar_tempo, pontuacao, flag, colisao
+     global flag_atr, flag_obst, acerto, angulo, angulo_, tempo, vel_inicial, vel_inicial_, omega, omega_, cor, pos_bola_conv, contar_tempo, pontuacao, flag, colisao
      sair = False
      dragging_vel = False
      dragging_atr = False
+     incremento_angulo = 0.25
 
      while sair == False:
           desenha_tela()
@@ -406,8 +437,11 @@ def main():
                     sair = True
 
                if evento.type == pygame.MOUSEBUTTONDOWN:             
-                    if botao_rect.collidepoint(evento.pos):  # Verifica se clicou no botão
+                    if botaoAtr_rect.collidepoint(evento.pos):  # Verifica se clicou no botão
                          flag_atr = not flag_atr
+                         print("Botão clicado!")
+                    if botaoObst_rect.collidepoint(evento.pos):  # Verifica se clicou no botão
+                         flag_obst = not flag_obst
                          print("Botão clicado!")
                     if sliderVel_handle.collidepoint(evento.pos):  # Verifica se clicou no controle de velocidade
                          dragging_vel = True
@@ -422,21 +456,21 @@ def main():
                     if dragging_vel:
                          new_x_vel = max(sliderVel_min, min(evento.pos[0], sliderVel_max - sliderVel_handle.width))
                          sliderVel_handle.x = new_x_vel
-                         vel_inicial_ = (new_x_vel - sliderVel_min)*0.5    # Ajusta a velocidade
+                         vel_inicial_ = (new_x_vel - sliderVel_min)*const_vel    # Ajusta a velocidade
                          
                     if dragging_atr:
                          new_x_atr = max(sliderAtr_min, min(evento.pos[0], sliderAtr_max - sliderAtr_handle.width))
                          sliderAtr_handle.x = new_x_atr
-                         omega_ = max(0.001, (new_x_atr - sliderAtr_min)*0.05)   # Ajusta o atrito do ar
+                         omega_ = max(0.001, (new_x_atr - sliderAtr_min)*const_omega)   # Ajusta o atrito do ar
 
           teclas = pygame.key.get_pressed()
 
           # Controle de ângulo e disparo
           if teclas[pygame.K_UP] and angulo_ < 90:     
-               angulo_ += 0.25
+               angulo_ += incremento_angulo
 
           if teclas[pygame.K_DOWN] and angulo_ > 0:
-               angulo_ -= 0.25
+               angulo_ -= incremento_angulo
           
           if teclas[pygame.K_SPACE]:
                contar_tempo = True
