@@ -44,14 +44,14 @@ vel_inicial = 20
 vel_inicial_ = 20 
 g = 9.8
 
-vel_min = 0  # Valor mínimo do slider
-vel_max_ = 100  # Valor máximo do slider
+# Constantes do slider de velocidade
+vel_min = 0 
+vel_max_ = 100 
 vel_max = vel_max_*(10/9)  # valor corrigido para caber no slider
 slider_range = vel_max - vel_min
 slider_increment = 0.2
 
 # Flags para indicar o estado dos botões 
-# flag = 0   # Flag para verificação da primeira colisão
 flag_obst = 0   # Flag para verificação da primeira colisão
 flag_atr = 0   # Flag para verificação da inclusão de resistência do ar
 
