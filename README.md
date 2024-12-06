@@ -334,4 +334,5 @@ $y=\frac{1}{\omega_{0}}(v_{0}\sin \theta+\frac{g}{\omega_{0}})(1-e^{-\omega_{0}t
 ## Referências
 
 Bernardes, E. de S. (2024). Dinâmica-v4 (Notas de aula). 7600105 - Física Básica I. Universidade de São Paulo, São Carlos.
-Físico Louco. Lançamento Oblíquo com Resistência do Ar - Mecânica Clássica. YouTube. Disponível em: [https://www.youtube.com/watch?v=xJaCHrMX9ys](https://www.youtube.com/watch?v=6gA-sj05yd8). Acesso em: 05 de dezembro de 2024
+
+Físico Louco. Lançamento Oblíquo com Resistência do Ar - Mecânica Clássica. YouTube(2022). Disponível em: [https://www.youtube.com/watch?v=xJaCHrMX9ys](https://www.youtube.com/watch?v=6gA-sj05yd8). Acesso em: 05 de dezembro de 2024
