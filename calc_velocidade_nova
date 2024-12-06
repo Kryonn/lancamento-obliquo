@@ -1,9 +1,16 @@
 import numpy
 
-angulo1 = 42
-angulo2 = 76
+print('angulo1: ')
+angulo1 = int(input())
+print('angulo2: ')
+angulo2 = int(input())
+print('velocidade1: ')
+v1 = int(input())
 
-v1 = 21
+# angulo1 = 42
+# angulo2 = 76
+
+# v1 = 21
 v2 = 0
 
 
