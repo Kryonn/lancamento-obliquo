@@ -45,9 +45,11 @@ vel_inicial = 20
 vel_inicial_ = 20 
 g = 9.8
 
-# Constante de multiplicação para os sliders
-const_omega = 0.025 
-const_vel = 0.5 
+vel_min = 0  # Valor mínimo do slider
+vel_max_ = 100  # Valor máximo do slider
+vel_max = vel_max_*(10/9)  # valor corrigido para caber no slider
+slider_range = vel_max - vel_min
+slider_increment = 0.2
 
 # Flags para indicar o estado dos botões 
 # flag = 0   # Flag para verificação da primeira colisão
@@ -76,6 +78,8 @@ slider_tam = 200
 slider_h = 10
 sliderVel_x = 50
 sliderVel_y = 100
+
+const_omega = 0.025 # Constante de multiplicação para o slider
 
 sliderVel_rect = pygame.Rect(sliderVel_x, sliderVel_y, slider_tam, slider_h)  
 sliderVel_handle = pygame.Rect(sliderVel_x+(vel_inicial*2), sliderVel_y-5, 20, 20)  
@@ -106,6 +110,9 @@ botaoObst_rect = pygame.Rect(botaoObst_x, botaoObst_y, botaoObst_comp, botaoObst
 
 textAng_x = 350
 textAng_y = 100
+
+# Constante de multiplicação para o slider
+const_vel = 80/slider_tam 
 
 # Funções
 
@@ -456,7 +463,8 @@ def main():
                     if dragging_vel:
                          new_x_vel = max(sliderVel_min, min(evento.pos[0], sliderVel_max - sliderVel_handle.width))
                          sliderVel_handle.x = new_x_vel
-                         vel_inicial_ = (new_x_vel - sliderVel_min)*const_vel    # Ajusta a velocidade
+                         vel_inicial_ = round((new_x_vel - sliderVel_min) / slider_tam * slider_range / slider_increment) * slider_increment
+
                          
                     if dragging_atr:
                          new_x_atr = max(sliderAtr_min, min(evento.pos[0], sliderAtr_max - sliderAtr_handle.width))
