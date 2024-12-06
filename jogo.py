@@ -45,6 +45,7 @@ vel_inicial = 20
 vel_inicial_ = 20 
 g = 9.8
 flag = 0   # Flag para verificação da primeira colisão
+flag_atr = 0   # Flag para verificação da inclusão de resistência do ar
 
 obstaculo_x = 450
 obstaculo_y = 350
@@ -67,20 +68,30 @@ img_canhao = pygame.transform.scale(img_canhao, (60, 60))
 slider_tam = 200
 slider_h = 10
 sliderVel_x = 50
-sliderVel_y = 30
+sliderVel_y = 100
 
 sliderVel_rect = pygame.Rect(sliderVel_x, sliderVel_y, slider_tam, slider_h)  
 sliderVel_handle = pygame.Rect(sliderVel_x+(vel_inicial*2), sliderVel_y-5, 20, 20)  
 sliderVel_min = sliderVel_x
 sliderVel_max = sliderVel_x + slider_tam
 
-sliderAtr_x = 50
+sliderAtr_x = 650
 sliderAtr_y = 100
 
 sliderAtr_rect = pygame.Rect(sliderAtr_x, sliderAtr_y, slider_tam, slider_h)  
 sliderAtr_handle = pygame.Rect(sliderAtr_x+(omega_*20), sliderAtr_y-5, 20, 20)  
 sliderAtr_min = sliderAtr_x
 sliderAtr_max = sliderAtr_x + slider_tam  
+
+# Posição e tamanho do botão
+botao_x = 30
+botao_y = 170
+botao_comp = 300
+botao_h = 40
+botao_rect = pygame.Rect(botao_x, botao_y, botao_comp, botao_h)
+
+textAng_x = 350
+textAng_y = 100
 
 # Funções
 
@@ -96,9 +107,15 @@ def calcula_trajetoria(tempo):
      - tuple[float, float]: Coordenadas da posição (x, y) da bolinha.
      """
      angulo_rad = numpy.radians(angulo)
-
-     pos_x = (vel_inicial*numpy.cos(angulo_rad)*(1-numpy.exp(-omega*tempo)))/omega
-     pos_y = (1/omega)*(vel_inicial*numpy.sin(angulo_rad) + (g/omega))*(1-numpy.exp(-omega*tempo)) - (g/omega)*tempo
+     
+     if flag_atr == 1:
+          # Cálculo com resistência do ar
+          pos_x = (vel_inicial*numpy.cos(angulo_rad)*(1-numpy.exp(-omega*tempo)))/omega
+          pos_y = (1/omega)*(vel_inicial*numpy.sin(angulo_rad) + (g/omega))*(1-numpy.exp(-omega*tempo)) - (g/omega)*tempo
+     else:
+          # Cálculo sem resistência do ar
+          pos_x = vel_inicial*numpy.cos(angulo_rad)*tempo
+          pos_y = vel_inicial*numpy.sin(angulo_rad)*tempo - ((g*numpy.power(tempo, 2))/2)
 
      # Ajusta para escala de visualização
      escala = 20
@@ -115,15 +132,16 @@ def desenha_tela():
 
      Não possui parâmetros ou retorno.
      """
-     global colisao
+     global colisao, omega, pos_bola_conv
+     pos_bola = calcula_trajetoria(tempo)
+     pos_bola_conv = (pos_bola[0] + origem_canhao[0], (altura_display - pos_bola[1]) - 27)
+
      cor_tela = (153, 201, 239)
      tela.fill(cor_tela)
      desenhar_seta(origem_canhao, comp_seta)
      desenha_slider_vel()
      texto_Vel(vel_inicial)
 
-     desenha_slider_atr()
-     texto_Atr(omega_)
      texto_Info()
      texto_Ang(angulo)
      desenha_quadrado()
@@ -144,6 +162,16 @@ def desenha_tela():
           if bola_rect.colliderect(obstaculo) == True:
                colisao = True
 
+     if flag_atr == 1:
+          desenha_slider_atr()
+          texto_botao = "Retirar resistência do ar (bônus)"
+          texto_Atr(omega_)
+     else:
+          omega = 0.00001
+          texto_botao = "Adicionar resistência do ar (bônus)"
+
+     desenha_botao(texto_botao)
+
      if acerto == 1:
           texto_acerto()
 
@@ -153,6 +181,18 @@ def desenha_tela():
      imagem_rotacionada = pygame.transform.rotate(img_canhao, angulo_-45)
      rect = imagem_rotacionada.get_rect(center=origem_canhao)
      tela.blit(imagem_rotacionada, rect.topleft)
+
+def desenha_botao(texto):
+     font = pygame.font.SysFont("Arial", 18)
+     text_color = pygame.Color('black')
+     button_text = font.render(texto, True, text_color)
+
+     mouse_pos = pygame.mouse.get_pos()
+     botao_cor = pygame.Color(235,207,95) if botao_rect.collidepoint(mouse_pos) else pygame.Color(252,221,98)
+
+     pygame.draw.rect(tela, botao_cor, botao_rect, border_radius=10)  # Desenha o botão
+     text_rect = button_text.get_rect(center=botao_rect.center)
+     tela.blit(button_text, text_rect)  # Adiciona o texto no botão
 
 def desenha_barco():
      """
@@ -250,7 +290,7 @@ def texto_Ang(value):
     """
     font = pygame.font.SysFont("Arial", 20)
     text = font.render(f'Ângulo do canhão: {value:.1f}°', True, (0, 0, 0))
-    tela.blit(text, (sliderAtr_x + slider_tam // 2 - text.get_width() // 2, sliderAtr_y + slider_h + 40)) 
+    tela.blit(text, (textAng_x, textAng_y)) 
 
 def texto_Vel(value):
     """
@@ -287,8 +327,10 @@ def texto_Info():
     font = pygame.font.SysFont("Arial", 20)
     text = font.render(f'Use as setas CIMA/BAIXO para mover o canhão.', True, (0, 0, 0))
     text2 = font.render(f'Pressione ESPAÇO para atirar!', True, (0, 0, 0))
-    tela.blit(text, (350, 30)) # Posição do texto
-    tela.blit(text2, (420, 60)) # Posição do texto
+    pos_x = 280
+    pos_y = 10
+    tela.blit(text, (pos_x, pos_y)) # Posição do texto
+    tela.blit(text2, (pos_x+70, pos_y+30)) # Posição do texto
 
 def texto_acerto():
     """
@@ -320,6 +362,11 @@ def colisao_alvo():
     return pygame.Rect.colliderect(quad, bola_rect)
 
 
+def reiniciar():
+     global contar_tempo, tempo
+     contar_tempo = False  # para a simulação
+     tempo = 0  # reseta o tempo
+     
 def main():
      """
      Função principal que inicializa o programa, gerencia o loop principal e 
@@ -327,14 +374,12 @@ def main():
 
      Não possui parâmetros ou retorno.
      """
-     global acerto, angulo, angulo_, tempo, vel_inicial, vel_inicial_, omega, omega_, cor, pos_bola_conv, contar_tempo, pontuacao, flag, colisao
+     global flag_atr, acerto, angulo, angulo_, tempo, vel_inicial, vel_inicial_, omega, omega_, cor, pos_bola_conv, contar_tempo, pontuacao, flag, colisao
      sair = False
      dragging_vel = False
      dragging_atr = False
 
      while sair == False:
-          pos_bola = calcula_trajetoria(tempo)
-          pos_bola_conv = (pos_bola[0] + origem_canhao[0], (altura_display - pos_bola[1]) - 27)
           desenha_tela()
           
           # Atualiza o angulo da trajetória da bola
@@ -345,14 +390,12 @@ def main():
                colisao = 0
 
           if colisao_alvo():
-               contar_tempo = False  # Para a simulação
-               tempo = 0  # Reseta o tempo
+               reiniciar()
                flag = 1
                acerto = 1
 
           elif colisao == 1 or pos_bola_conv[1] > altura_display or pos_bola_conv[0] > largura_display:
-               contar_tempo = False  
-               tempo = 0 
+               reiniciar()
 
           if contar_tempo == True:
                tempo += clock.get_time() / 300    
@@ -361,7 +404,11 @@ def main():
           for evento in eventos:
                if evento.type == pygame.QUIT:  # Fechar o programa
                     sair = True
-               if evento.type == pygame.MOUSEBUTTONDOWN:
+
+               if evento.type == pygame.MOUSEBUTTONDOWN:             
+                    if botao_rect.collidepoint(evento.pos):  # Verifica se clicou no botão
+                         flag_atr = not flag_atr
+                         print("Botão clicado!")
                     if sliderVel_handle.collidepoint(evento.pos):  # Verifica se clicou no controle de velocidade
                          dragging_vel = True
                     if sliderAtr_handle.collidepoint(evento.pos):  # Verifica se clicou no controle de atrito do ar
@@ -386,10 +433,10 @@ def main():
 
           # Controle de ângulo e disparo
           if teclas[pygame.K_UP] and angulo_ < 90:     
-               angulo_ += 0.5
+               angulo_ += 0.25
 
           if teclas[pygame.K_DOWN] and angulo_ > 0:
-               angulo_ -= 0.5
+               angulo_ -= 0.25
           
           if teclas[pygame.K_SPACE]:
                contar_tempo = True
