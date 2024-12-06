@@ -204,6 +204,11 @@ def desenha_tela():
      tela.blit(imagem_rotacionada, rect.topleft)
 
 def desenha_botao_atr(texto):
+     """
+     Desenha o botão e o texto de ativar/desativar a resistência do ar em sua posição predefinida.
+
+     Não possui parâmetros ou retorno.
+     """
      font = pygame.font.SysFont("Arial", 18)
      text_color = pygame.Color('black')
      button_text = font.render(texto, True, text_color)
@@ -216,6 +221,11 @@ def desenha_botao_atr(texto):
      tela.blit(button_text, text_rect)  # Adiciona o texto no botão
 
 def desenha_botao_obst(texto):
+     """
+     Desenha o botão e o texto de ativar/desativar o obstáculo em sua posição predefinida.
+
+     Não possui parâmetros ou retorno.
+     """
      font = pygame.font.SysFont("Arial", 18)
      text_color = pygame.Color('black')
      button_text = font.render(texto, True, text_color)
@@ -396,6 +406,12 @@ def colisao_alvo():
 
 
 def reiniciar():
+     """
+     Para a simulação e reseta a contagem de tempo, para retornar a bolinha
+     na posição correta.
+
+     Não possui parâmetros ou retorno.
+     """
      global contar_tempo, tempo
      contar_tempo = False  # para a simulação
      tempo = 0  # reseta o tempo
@@ -440,10 +456,10 @@ def main():
                     sair = True
 
                if evento.type == pygame.MOUSEBUTTONDOWN:             
-                    if botaoAtr_rect.collidepoint(evento.pos):  # Verifica se clicou no botão
+                    if botaoAtr_rect.collidepoint(evento.pos):  # Verifica se clicou no botão de atrito
                          flag_atr = not flag_atr
                          print("Botão clicado!")
-                    if botaoObst_rect.collidepoint(evento.pos):  # Verifica se clicou no botão
+                    if botaoObst_rect.collidepoint(evento.pos):  # Verifica se clicou no botão de obstáculo
                          flag_obst = not flag_obst
                          print("Botão clicado!")
                     if sliderVel_handle.collidepoint(evento.pos):  # Verifica se clicou no controle de velocidade
