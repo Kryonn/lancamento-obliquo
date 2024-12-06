@@ -18,7 +18,7 @@ Vamos começar com uma contextualização: um pirata percebe que tem um inimigo 
 
 O movimento oblíquo, diferente da queda livre, possui duas direções de movimento, sendo, nesse caso, o eixo x referente ao eixo horizontal e o eixo y ao eixo vertical.
 
-A trajetória é descrita por uma parábola, mas por que? Isso ocorre devido as forças atuantes durante o movimento. Durante o lançamento, apenas a força gravitacional($`\vec{F_{g}}`$) atua no objeto, por isso, há uma desaceleração na direção do eixo y do movimento, fazendo com que a velocidade diminua, enquanto que, na direção do eixo x do movimento, a velocidade se mantém constante.
+A trajetória é descrita por uma parábola, mas por que? Isso ocorre devido às forças atuantes durante o movimento. Durante o lançamento, apenas a força gravitacional($`\vec{F_{g}}`$) atua no objeto, por isso, há uma desaceleração na direção do eixo y do movimento, fazendo com que a velocidade diminua, enquanto que, na direção do eixo x, a velocidade se mantém constante.
 
 A figura a seguir nos mostra o modelo geral de um lançamento oblíquo, sendo $\vec{v_{0}}$ a velocidade inicial do objeto, $\vec{F_{g}}$ a força gravitacional e $\vec{r}$ o vetor posição.
 
@@ -30,7 +30,13 @@ A figura a seguir nos mostra o modelo geral de um lançamento oblíquo, sendo $\
 
 ### Construção das EDOs:
 
-Temos a trajetória, mas como transformamos o desenho em números? 
+<div align="center">
+
+$\vec{r}=(x(t),\ y(t),\ 0), \vec{v}=(\dot{x}(t),\ \dot{y}(t),\ 0), \vec{a}=(\ddot{x}(t),\ \ddot{y}(t),\ 0).$
+
+</div>
+
+Temos o esboço da trajetória, mas como transformamos o desenho em números? 
 
 No sistema acima, atuam as seguintes forças:
 
@@ -59,7 +65,7 @@ $m\ddot{y}=-mg.$
 
 </div>
 
-Logo, chegamos na seguintes EDOs:
+Logo, chegamos nas seguintes EDOs:
 
 <div align="center">
 
