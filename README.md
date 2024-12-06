@@ -195,11 +195,17 @@ Substituindo os valores de $t_{1}$ e $t_{2}$ e isolando $v_{2}$, ficamos com:
 
 <div align="center">
 
-$v_{1}.\cos\theta t_{1}=v_{2}.\cos(\theta+\phi) t_{2} \Rightarrow \frac{v_{1}.\cos\theta.v_{1}\sin\theta}{g}=\frac{v_{2}.\cos(\theta+\phi).v_{2}\sin(\theta + \phi)}{g} \Rightarrow v_{2}^{2}=v_{1}^{2}.\frac{\cos\theta\sin \theta}{\cos(\theta + \phi)\sin(\theta+\phi)} \Rightarrow v_{2}=v_{1}.\sqrt{\frac{\cos\theta\sin \theta}{\cos(\theta + \phi)\sin(\theta+\phi)}}.$
+$v_{1}.\cos\theta t_{1}=v_{2}.\cos(\theta+\phi) t_{2} \Rightarrow \frac{2v_{1}.\cos\theta.v_{1}\sin\theta}{g}=\frac{2v_{2}.\cos(\theta+\phi).v_{2}\sin(\theta + \phi)}{g} \Rightarrow v_{2}^{2}=v_{1}^{2}.\frac{\cos\theta\sin \theta}{\cos(\theta + \phi)\sin(\theta+\phi)} \Rightarrow v_{2}=v_{1}.\sqrt{\frac{\cos\theta\sin \theta}{\cos(\theta + \phi)\sin(\theta+\phi)}}.$
 
 </div>
 
-Portanto, com esse resultado, podemos concluir que, para que o pirata consiga atingir o inimigo aumentando $\phi$ graus de angulação, será necessário aumentar $\sqrt{\cos\theta\sin \theta}$ / $\sqrt{\cos(\theta + \phi)\sin(\theta+\phi)}$ vezes o número de pólvora no canhão. Exemplo: $Ang_{1}=42°, v_{1}=21 m/s, Ang_{2}=76°, v_{2}=?$
+Portanto, com esse resultado, podemos concluir que, para que o pirata consiga atingir o inimigo aumentando $\phi$ graus de angulação, será necessário aumentar $\sqrt{\cos\theta\sin \theta}$ / $\sqrt{\cos(\theta + \phi)\sin(\theta+\phi)}$ vezes o número de pólvora no canhão. Exemplo teste: 
+
+<div align="center">
+
+$Ang_{1}=42°, v_{1}=21 m/s, Ang_{2}=76°, v_{2}=?$
+
+</div>
 
 ## Implementação
 
