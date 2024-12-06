@@ -111,9 +111,6 @@ botaoObst_rect = pygame.Rect(botaoObst_x, botaoObst_y, botaoObst_comp, botaoObst
 textAng_x = 350
 textAng_y = 100
 
-# Constante de multiplicação para o slider
-const_vel = 80/slider_tam 
-
 # Funções
 
 def calcula_trajetoria(tempo):
