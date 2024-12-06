@@ -209,13 +209,11 @@ $Ang_{1}=42°, v_{1}=21 m/s, Ang_{2}=76°, v_{2}=?$
 
 ### Resistência do ar
 
-O lançamento oblíquo possui uma variação em que inclui a resistência do ar na descrição da trajetória. A resistência, mais conhecida como força viscosa, atua de maneira contrária à velocidade, sendo uma força dissipativa. O processo para obter as expressões relativas a descrição do movimento é o mesmo: montar as EDOs e depois resolvê-las.
+O lançamento oblíquo possui uma variação em que inclui a resistência do ar na descrição da trajetória. A resistência, mais conhecida como força viscosa($\vec{F_{v}}$), atua de maneira contrária à velocidade, sendo uma força dissipativa. O processo para obter as expressões relativas a descrição do movimento é o mesmo: montar as EDOs e depois resolvê-las.
 
 ### Construção das EDOs:
 
-Temos a trajetória, mas como transformamos o desenho em física de fato? 
-
-No sistema acima, atuam as seguintes forças:
+No lançamento oblíquo com força viscosa, atuam as seguintes forças:
 
 <div align="center">
 
