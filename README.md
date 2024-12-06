@@ -149,7 +149,9 @@ Mas afinal, quais são as respostas para as dúvidas do pirata? Para entendermos
 
 <div align="center">
 
-![traj](https://github.com/user-attachments/assets/6e9ee1d3-6bd3-443e-b93d-241751240da8)
+![Captura de tela 2024-12-06 000703](https://github.com/user-attachments/assets/2a1704a3-6046-4247-8097-17bfe7206c62)
+
+![Captura de tela 2024-12-06 000957](https://github.com/user-attachments/assets/d1fd1953-efc5-4a07-95a7-0a543eb84caf)
 
 </div>
 
