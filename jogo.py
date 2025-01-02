@@ -19,6 +19,12 @@ import pygame # type: ignore
 import numpy
 
 # Variáveis gerais
+
+# velocidade e angulo de referência para um acerto
+vel_ref = 22.8
+ang_ref = 60
+nova_vel = 0
+
 pontuacao = 0
 altura_display = 600
 largura_display = 1000
@@ -54,6 +60,7 @@ slider_increment = 0.2
 # Flags para indicar o estado dos botões 
 flag_obst = 0   # Flag para verificação da primeira colisão
 flag_atr = 0   # Flag para verificação da inclusão de resistência do ar
+flag_calc = 0  # Flag para verificação do cálculo de uma nova velocidade
 
 obstaculo_x = 450
 obstaculo_y = 350
@@ -94,15 +101,22 @@ sliderAtr_min = sliderAtr_x
 sliderAtr_max = sliderAtr_x + slider_tam  
 
 # Configuração do botão de ativar atrito
-botaoAtr_x = 30
-botaoAtr_y = 170
+botaoAtr_x = 70
+botaoAtr_y = 160
 botaoAtr_comp = 300
 botaoAtr_h = 40
 botaoAtr_rect = pygame.Rect(botaoAtr_x, botaoAtr_y, botaoAtr_comp, botaoAtr_h)
 
+# Configuração do botão de calcular a velocidade recomendada
+botaoCalcular_x = 670
+botaoCalcular_y = 160
+botaoCalcular_comp = 220
+botaoCalcular_h = 40
+botaoCalcular_rect = pygame.Rect(botaoCalcular_x, botaoCalcular_y, botaoCalcular_comp, botaoCalcular_h)
+
 # Configuração do botão de ativar obstáculo
-botaoObst_x = 350
-botaoObst_y = 170
+botaoObst_x = 420
+botaoObst_y = 160
 botaoObst_comp = 200
 botaoObst_h = 40
 botaoObst_rect = pygame.Rect(botaoObst_x, botaoObst_y, botaoObst_comp, botaoObst_h)
@@ -189,6 +203,9 @@ def desenha_tela():
      else:
           omega = 0.00001
           texto_botaoAtr = "Adicionar resistência do ar (bônus)"
+          desenha_botao_calcularVel("Calcular velocidade")
+          if flag_calc == 1:
+               texto_novaVel(nova_vel)
 
      desenha_botao_atr(texto_botaoAtr)
      desenha_botao_obst(texto_botaoObst)
@@ -218,6 +235,23 @@ def desenha_botao_atr(texto):
 
      pygame.draw.rect(tela, botao_cor, botaoAtr_rect, border_radius=10)  # Desenha o botão
      text_rect = button_text.get_rect(center=botaoAtr_rect.center)
+     tela.blit(button_text, text_rect)  # Adiciona o texto no botão
+
+def desenha_botao_calcularVel(texto):
+     """
+     Desenha o botão e o texto de calcular a velocidade recomendada.
+
+     Não possui parâmetros ou retorno.
+     """
+     font = pygame.font.SysFont("Arial", 18)
+     text_color = pygame.Color('black')
+     button_text = font.render(texto, True, text_color)
+
+     mouse_pos = pygame.mouse.get_pos()
+     botao_cor = pygame.Color(235,207,95) if botaoCalcular_rect.collidepoint(mouse_pos) else pygame.Color(252,221,98)
+
+     pygame.draw.rect(tela, botao_cor, botaoCalcular_rect, border_radius=10)  # Desenha o botão
+     text_rect = button_text.get_rect(center=botaoCalcular_rect.center)
      tela.blit(button_text, text_rect)  # Adiciona o texto no botão
 
 def desenha_botao_obst(texto):
@@ -348,6 +382,19 @@ def texto_Vel(value):
     text = font.render(f'Velocidade Inicial: {value:.1f} m/s', True, (0, 0, 0))
     tela.blit(text, (sliderVel_x + slider_tam // 2 - text.get_width() // 2, sliderVel_y + slider_h + 10)) 
 
+def texto_novaVel(value):
+    """
+    Exibe o valor da velocidade recomendada para acertar o alvo.
+
+    Parâmetros:
+    - value (float): Velocidade inicial em m/s.
+
+    Não possui retorno.
+    """
+    font = pygame.font.SysFont("Arial", 18)
+    text = font.render(f'Velocidade recomendada: {value:.1f} m/s', True, (0, 0, 0))
+    tela.blit(text, (640, 210)) 
+
 def texto_Atr(value):
     """
     Exibe o valor atual da resistência do ar abaixo do slider correspondente.
@@ -383,7 +430,7 @@ def texto_acerto():
     """
     font = pygame.font.SysFont("Arial", 20)
     text = font.render(f'Você acertou o alvo!', True, "red")
-    tela.blit(text, (600, 180)) # Posição do texto
+    tela.blit(text, (400, 210)) # Posição do texto
 
 # Funções para verificar as colisões
 def colisao_alvo():
@@ -423,7 +470,7 @@ def main():
 
      Não possui parâmetros ou retorno.
      """
-     global flag_atr, flag_obst, acerto, angulo, angulo_, tempo, vel_inicial, vel_inicial_, omega, omega_, cor, pos_bola_conv, contar_tempo, pontuacao, flag, colisao
+     global flag_calc, nova_vel, ang_ref, vel_ref, flag_atr, flag_obst, acerto, angulo, angulo_, tempo, vel_inicial, vel_inicial_, omega, omega_, cor, pos_bola_conv, contar_tempo, pontuacao, flag, colisao
      sair = False
      dragging_vel = False
      dragging_atr = False
@@ -458,10 +505,16 @@ def main():
                if evento.type == pygame.MOUSEBUTTONDOWN:             
                     if botaoAtr_rect.collidepoint(evento.pos):  # Verifica se clicou no botão de atrito
                          flag_atr = not flag_atr
-                         print("Botão clicado!")
                     if botaoObst_rect.collidepoint(evento.pos):  # Verifica se clicou no botão de obstáculo
                          flag_obst = not flag_obst
-                         print("Botão clicado!")
+
+                    if botaoCalcular_rect.collidepoint(evento.pos):  # Verifica se clicou no botão de calcular velocidade
+                         ang_ref_rad = numpy.radians(ang_ref)
+                         angulo_rad = numpy.radians(angulo_)
+
+                         nova_vel = vel_ref * numpy.sqrt((numpy.cos(ang_ref_rad)*numpy.sin(ang_ref_rad))/(numpy.cos(angulo_rad)*numpy.sin(angulo_rad)))    
+                         flag_calc = True
+
                     if sliderVel_handle.collidepoint(evento.pos):  # Verifica se clicou no controle de velocidade
                          dragging_vel = True
                     if sliderAtr_handle.collidepoint(evento.pos):  # Verifica se clicou no controle de atrito do ar
@@ -488,9 +541,11 @@ def main():
           # Controle de ângulo e disparo
           if teclas[pygame.K_UP] and angulo_ < 90:     
                angulo_ += incremento_angulo
+               flag_calc = False
 
           if teclas[pygame.K_DOWN] and angulo_ > 0:
                angulo_ -= incremento_angulo
+               flag_calc = False
           
           if teclas[pygame.K_SPACE]:
                contar_tempo = True
